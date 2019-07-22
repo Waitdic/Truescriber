@@ -1,0 +1,9 @@
+E:\gitlab\Truescriber\Truescriber.DAL\bin\Debug\netcoreapp2.1\Truescriber.DAL.deps.json
+E:\gitlab\Truescriber\Truescriber.DAL\bin\Debug\netcoreapp2.1\Truescriber.DAL.dll
+E:\gitlab\Truescriber\Truescriber.DAL\obj\Debug\netcoreapp2.1\Truescriber.DAL.csproj.CoreCompileInputs.cache
+E:\gitlab\Truescriber\Truescriber.DAL\obj\Debug\netcoreapp2.1\Truescriber.DAL.AssemblyInfoInputs.cache
+E:\gitlab\Truescriber\Truescriber.DAL\obj\Debug\netcoreapp2.1\Truescriber.DAL.AssemblyInfo.cs
+E:\gitlab\Truescriber\Truescriber.DAL\obj\Debug\netcoreapp2.1\Truescriber.DAL.csprojAssemblyReference.cache
+E:\gitlab\Truescriber\Truescriber.DAL\bin\Debug\netcoreapp2.1\Truescriber.DAL.pdb
+E:\gitlab\Truescriber\Truescriber.DAL\obj\Debug\netcoreapp2.1\Truescriber.DAL.dll
+E:\gitlab\Truescriber\Truescriber.DAL\obj\Debug\netcoreapp2.1\Truescriber.DAL.pdb

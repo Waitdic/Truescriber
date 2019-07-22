@@ -10,8 +10,6 @@ namespace Truescriber.WEB.Models
     public class TruescriberContext : DbContext
     {
         public DbSet<User> Users { get; set; }
-        public DbSet<File> Files { get; set; }
-
 
         public TruescriberContext(DbContextOptions<TruescriberContext> options)
             :base(options)

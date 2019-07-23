@@ -1,0 +1,12 @@
+E:\gitlab\Truescriber\Truescriber.BLL\bin\Debug\netcoreapp2.1\Truescriber.BLL.deps.json
+E:\gitlab\Truescriber\Truescriber.BLL\bin\Debug\netcoreapp2.1\Truescriber.BLL.dll
+E:\gitlab\Truescriber\Truescriber.BLL\bin\Debug\netcoreapp2.1\Truescriber.BLL.pdb
+E:\gitlab\Truescriber\Truescriber.BLL\bin\Debug\netcoreapp2.1\Truescriber.DAL.dll
+E:\gitlab\Truescriber\Truescriber.BLL\bin\Debug\netcoreapp2.1\Truescriber.DAL.pdb
+E:\gitlab\Truescriber\Truescriber.BLL\obj\Debug\netcoreapp2.1\Truescriber.BLL.csprojAssemblyReference.cache
+E:\gitlab\Truescriber\Truescriber.BLL\obj\Debug\netcoreapp2.1\Truescriber.BLL.csproj.CoreCompileInputs.cache
+E:\gitlab\Truescriber\Truescriber.BLL\obj\Debug\netcoreapp2.1\Truescriber.BLL.AssemblyInfoInputs.cache
+E:\gitlab\Truescriber\Truescriber.BLL\obj\Debug\netcoreapp2.1\Truescriber.BLL.AssemblyInfo.cs
+E:\gitlab\Truescriber\Truescriber.BLL\obj\Debug\netcoreapp2.1\Truescriber.BLL.csproj.CopyComplete
+E:\gitlab\Truescriber\Truescriber.BLL\obj\Debug\netcoreapp2.1\Truescriber.BLL.dll
+E:\gitlab\Truescriber\Truescriber.BLL\obj\Debug\netcoreapp2.1\Truescriber.BLL.pdb

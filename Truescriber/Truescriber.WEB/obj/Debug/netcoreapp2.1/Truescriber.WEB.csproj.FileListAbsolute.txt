@@ -32,3 +32,5 @@ E:\gitlab\Truescriber\Truescriber.WEB\obj\Debug\netcoreapp2.1\Truescriber.WEB.Vi
 E:\gitlab\Truescriber\Truescriber.WEB\obj\Debug\netcoreapp2.1\Truescriber.WEB.csproj.CopyComplete
 E:\gitlab\Truescriber\Truescriber.WEB\obj\Debug\netcoreapp2.1\Truescriber.WEB.dll
 E:\gitlab\Truescriber\Truescriber.WEB\obj\Debug\netcoreapp2.1\Truescriber.WEB.pdb
+E:\gitlab\Truescriber\Truescriber.WEB\bin\Debug\netcoreapp2.1\Truescriber.BLL.dll
+E:\gitlab\Truescriber\Truescriber.WEB\bin\Debug\netcoreapp2.1\Truescriber.BLL.pdb

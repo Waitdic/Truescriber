@@ -9,9 +9,10 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Truescriber.WEB.Models;
+using Truescriber.DAL.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace Truescriber.WEB
 {
@@ -36,12 +37,16 @@ namespace Truescriber.WEB
 
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<TruescriberContext>(options => options.UseSqlServer(connection));
+            services.AddDbContext<AuthorizationContext>(options => options.UseSqlServer(connection));
+
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<AuthorizationContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
+        {   
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

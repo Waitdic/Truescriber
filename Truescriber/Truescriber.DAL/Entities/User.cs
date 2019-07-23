@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.AspNetCore.Identity;
+
 
 namespace Truescriber.DAL.Entities
 {
-    public class User
+    public class User : IdentityUser
     {
         public int Id { get; set; } 
 
@@ -13,6 +12,10 @@ namespace Truescriber.DAL.Entities
 
         public string Login { get; set; }
         public string Password { get; set; }
+
+        public string Online { get; set; }
+
+
 
     }
 }

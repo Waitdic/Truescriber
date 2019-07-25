@@ -34,3 +34,6 @@ E:\gitlab\Truescriber\Truescriber.WEB\obj\Debug\netcoreapp2.1\Truescriber.WEB.dl
 E:\gitlab\Truescriber\Truescriber.WEB\obj\Debug\netcoreapp2.1\Truescriber.WEB.pdb
 E:\gitlab\Truescriber\Truescriber.WEB\bin\Debug\netcoreapp2.1\Truescriber.BLL.dll
 E:\gitlab\Truescriber\Truescriber.WEB\bin\Debug\netcoreapp2.1\Truescriber.BLL.pdb
+E:\gitlab\Truescriber\Truescriber.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Account\Login.g.cshtml.cs
+E:\gitlab\Truescriber\Truescriber.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Account\Register.g.cshtml.cs
+E:\gitlab\Truescriber\Truescriber.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Account\Profile.g.cshtml.cs

@@ -14,12 +14,12 @@ namespace Truescriber.BLL.IdentityModels
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Пароль")]
+        [Display(Name = "Password")]
         public string Password { get; set; }
 
         public string ReturnUrl { get; set; }
 
-        public bool Online { get; private set; }
+        public bool Online { get; set; }
 
     }
 }

@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Truescriber.WEB.Models;
 using Truescriber.DAL.Entities;
 using Microsoft.AspNetCore.Identity;
+using Truescriber.WEB.Infrastructure;
 
 namespace Truescriber.WEB
 {
@@ -35,14 +36,9 @@ namespace Truescriber.WEB
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+          
             string connection = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<TruescriberContext>(options => options.UseSqlServer(connection));
-            services.AddDbContext<AuthorizationContext>(options => options.UseSqlServer(connection));
-
-            services.AddIdentity<User, IdentityRole>()
-                .AddEntityFrameworkStores<AuthorizationContext>();
-
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddServices(connection);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -57,15 +53,16 @@ namespace Truescriber.WEB
                 app.UseHsts();
             }
 
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Account}/{action=Login}/{id?}");
             });
         }
     }

@@ -3,29 +3,29 @@
 <h2 align="center" >Вход в приложение</h2>
 <div>
     <form method="post" asp-controller="Account" asp-action="Login">
-    <div asp-validation-summary="ModelOnly"></div>
-    <div>
-        <div  align="center">
+        <div align="center" asp-validation-summary="ModelOnly"></div>
+        <div>
             <div align="center">
-                <label asp-for="Login"></label><br/>
-                <input asp-for="Login"/>
+                <div align="center">
+                    <label asp-for="Login"></label><br />
+                    <input asp-for="Login" />
+                </div>
+                <span asp-validation-for="Login"></span>
+                <br />
             </div>
-            <span asp-validation-for="Login" ></span>
-            <br/>
+
+            <div align="center">
+                <div align="center">
+                    <label asp-for="Password"></label><br />
+                    <input asp-for="Password" />
+                </div>
+                <span asp-validation-for="Password"></span>
+                <br />
+            </div>
         </div>
-   
+        <br />
         <div align="center">
-            <div align="center">
-                <label asp-for="Password"></label><br />
-                <input asp-for="Password" />
-            </div>
-            <span asp-validation-for="Password"></span>
-            <br/>
+            <input type="submit" value="Войти" />
         </div>
-    </div>
-    <br />
-    <div align="center">
-        <input type="submit" value="Войти" />
-    </div>
-</form>
+    </form>
 </div>

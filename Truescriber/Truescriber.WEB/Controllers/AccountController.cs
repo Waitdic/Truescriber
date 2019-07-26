@@ -66,7 +66,8 @@ namespace Truescriber.WEB.Controllers
 
             if (!result.Succeeded)
             {
-                ModelState.AddModelError("", "Неправильный логин и (или) пароль");
+                    ModelState.AddModelError("", "Неправильный логин и (или) пароль");
+                //ViewBag.Message = "Неправильный логин и (или) пароль";
                 return View(model);
             }
 

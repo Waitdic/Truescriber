@@ -1,18 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
-using Truescriber.WEB.Models;
-using Truescriber.DAL.Entities;
-using Microsoft.AspNetCore.Identity;
 using Truescriber.WEB.Infrastructure;
 
 namespace Truescriber.WEB
@@ -31,14 +21,14 @@ namespace Truescriber.WEB
         {
             services.Configure<CookiePolicyOptions>(options =>
             {
-               
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-          
-            string connection = Configuration.GetConnectionString("DefaultConnection");
-            services.AddServices(connection);
+            var connection = Configuration.GetConnectionString("DefaultConnection");
+
+            services.AddRegistry(connection);
+            services.AddMvcService();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -53,7 +43,6 @@ namespace Truescriber.WEB
                 app.UseHsts();
             }
 
-
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
@@ -64,6 +53,7 @@ namespace Truescriber.WEB
                     name: "default",
                     template: "{controller=Account}/{action=Login}/{id?}");
             });
+           
         }
     }
 }

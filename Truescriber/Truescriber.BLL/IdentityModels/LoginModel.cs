@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 
 namespace Truescriber.BLL.IdentityModels
@@ -16,10 +13,5 @@ namespace Truescriber.BLL.IdentityModels
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
-
-        public string ReturnUrl { get; set; }
-
-        public bool Online { get; set; }
-
     }
 }

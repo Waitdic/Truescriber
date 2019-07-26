@@ -9,10 +9,9 @@ namespace Truescriber.WEB.Infrastructure
 {
     public static class ServiceProviderExtensions
     {
-        public static void AddServices(this IServiceCollection services, string connection)
+        public static void AddRegistry(this IServiceCollection services, string connection)
         {
             services.ConfigureApplicationCookie(opts => opts.LoginPath = "/Users/Login");
-
             services.AddDbContext<TruescriberContext>(options => options.UseSqlServer(connection));
             services.AddIdentity<User, IdentityRole>(opts =>
                 {
@@ -24,7 +23,10 @@ namespace Truescriber.WEB.Infrastructure
                 })
                 .AddEntityFrameworkStores<TruescriberContext>()
                 .AddDefaultTokenProviders();
+        }   
 
+        public static void AddMvcService(this IServiceCollection services)
+        {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
     }

@@ -6,7 +6,6 @@ namespace Truescriber.DAL.Entities
     {
         public User()
         {
-            
         }
 
         public string Name { get; set; }

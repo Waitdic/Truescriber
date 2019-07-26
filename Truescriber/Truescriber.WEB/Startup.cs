@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
-using Microsoft.EntityFrameworkCore;
-using Truescriber.WEB.Models;
+using Truescriber.WEB.Infrastructure;
 
 namespace Truescriber.WEB
 {
@@ -29,19 +21,18 @@ namespace Truescriber.WEB
         {
             services.Configure<CookiePolicyOptions>(options =>
             {
-               
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            string connection = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<TruescriberContext>(options => options.UseSqlServer(connection));
+            var connection = Configuration.GetConnectionString("DefaultConnection");
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddRegistry(connection);
+            services.AddMvcService();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
+        {   
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -55,13 +46,14 @@ namespace Truescriber.WEB
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Account}/{action=Login}/{id?}");
             });
+           
         }
     }
 }

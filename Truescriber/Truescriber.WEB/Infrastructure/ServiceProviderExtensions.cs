@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
-using Truescriber.WEB.Models;
 using Truescriber.DAL.Entities;
 using Microsoft.AspNetCore.Identity;
+using Truescriber.DAL.EFContext;
+using Truescriber.WEB.Models;
 
 namespace Truescriber.WEB.Infrastructure
 {
@@ -12,7 +13,7 @@ namespace Truescriber.WEB.Infrastructure
         public static void AddRegistry(this IServiceCollection services, string connection)
         {
             services.ConfigureApplicationCookie(opts => opts.LoginPath = "/Users/Login");
-            services.AddDbContext<TruescriberContext>(options => options.UseSqlServer(connection));
+            services.AddDbContext<TruescriberContext>(options => options.UseSqlServer(connection, b => b.MigrationsAssembly("Truescriber.DAL")));
             services.AddIdentity<User, IdentityRole>(opts =>
                 {
                     opts.Password.RequiredLength = 5;

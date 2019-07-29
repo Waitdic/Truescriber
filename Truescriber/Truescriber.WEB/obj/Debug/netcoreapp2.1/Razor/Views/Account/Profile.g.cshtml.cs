@@ -63,7 +63,7 @@ using Truescriber.WEB.Models;
             WriteLiteral("\r\n\r\n<h2 align=\"center\">Profile</h2>\r\n");
             EndContext();
             BeginContext(82, 121, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f861cc4ffb70475196a19d7b0e33fdb3", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d6cb7c73de794b27b914a8b1c363822a", async() => {
                 BeginContext(147, 49, true);
                 WriteLiteral("\r\n        <input type=\"submit\" value=\"Выход\" />\r\n");
                 EndContext();

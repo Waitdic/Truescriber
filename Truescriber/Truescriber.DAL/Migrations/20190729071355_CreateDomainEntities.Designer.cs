@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Truescriber.WEB.Models;
+using Truescriber.DAL.EFContext;
 
-namespace Truescriber.WEB.Migrations
+namespace Truescriber.DAL.Migrations
 {
     [DbContext(typeof(TruescriberContext))]
-    [Migration("20190725074408_ModifyUsers")]
-    partial class ModifyUsers
+    [Migration("20190729071355_CreateDomainEntities")]
+    partial class CreateDomainEntities
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -131,6 +131,36 @@ namespace Truescriber.WEB.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Truescriber.DAL.Entities.File", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Files");
+                });
+
+            modelBuilder.Entity("Truescriber.DAL.Entities.Task", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("FileId");
+
+                    b.Property<string>("UserId1");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FileId");
+
+                    b.HasIndex("UserId1");
+
+                    b.ToTable("Tasks");
+                });
+
             modelBuilder.Entity("Truescriber.DAL.Entities.User", b =>
                 {
                     b.Property<string>("Id")
@@ -150,10 +180,6 @@ namespace Truescriber.WEB.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
 
-                    b.Property<string>("Login");
-
-                    b.Property<string>("Name");
-
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256);
 
@@ -162,8 +188,6 @@ namespace Truescriber.WEB.Migrations
 
                     b.Property<bool>("Online");
 
-                    b.Property<string>("Password");
-
                     b.Property<string>("PasswordHash");
 
                     b.Property<string>("PhoneNumber");
@@ -171,8 +195,6 @@ namespace Truescriber.WEB.Migrations
                     b.Property<bool>("PhoneNumberConfirmed");
 
                     b.Property<string>("SecurityStamp");
-
-                    b.Property<string>("Surname");
 
                     b.Property<bool>("TwoFactorEnabled");
 
@@ -235,6 +257,17 @@ namespace Truescriber.WEB.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Truescriber.DAL.Entities.Task", b =>
+                {
+                    b.HasOne("Truescriber.DAL.Entities.File", "File")
+                        .WithMany()
+                        .HasForeignKey("FileId");
+
+                    b.HasOne("Truescriber.DAL.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId1");
                 });
 #pragma warning restore 612, 618
         }

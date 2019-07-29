@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
 
 namespace Truescriber.DAL.Entities
 {
@@ -8,13 +9,14 @@ namespace Truescriber.DAL.Entities
         {
         }
 
-        public string Name { get; set; }
-        public string Surname { get; set; }
+        private string Name { get; set; }
+        private string Surname { get; set; }
 
-        public string Login { get; set; }
-        public string Password { get; set; }
+        private string Login { get; set; }
+        private string Password { get; set; }
 
         public bool Online { get; set; }
 
+        private ICollection<Task> Tasks { get; set; }
     }
 }

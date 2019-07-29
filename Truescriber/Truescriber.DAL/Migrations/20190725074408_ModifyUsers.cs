@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Truescriber.WEB.Migrations
+namespace Truescriber.DAL.Migrations
 {
     public partial class ModifyUsers : Migration
     {

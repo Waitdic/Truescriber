@@ -7,3 +7,12 @@ E:\gitlab\Truescriber\Truescriber.DAL\obj\Debug\netcoreapp2.1\Truescriber.DAL.cs
 E:\gitlab\Truescriber\Truescriber.DAL\bin\Debug\netcoreapp2.1\Truescriber.DAL.pdb
 E:\gitlab\Truescriber\Truescriber.DAL\obj\Debug\netcoreapp2.1\Truescriber.DAL.dll
 E:\gitlab\Truescriber\Truescriber.DAL\obj\Debug\netcoreapp2.1\Truescriber.DAL.pdb
+E:\gitlab\Truescriber\Truescriber.DAL\bin\Debug\netcoreapp2.1\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+E:\gitlab\Truescriber\Truescriber.DAL\bin\Debug\netcoreapp2.1\Microsoft.EntityFrameworkCore.dll
+E:\gitlab\Truescriber\Truescriber.DAL\bin\Debug\netcoreapp2.1\Microsoft.AspNetCore.Identity.EntityFrameworkCore.xml
+E:\gitlab\Truescriber\Truescriber.DAL\bin\Debug\netcoreapp2.1\Microsoft.EntityFrameworkCore.xml
+E:\gitlab\Truescriber\Truescriber.DAL\obj\Debug\netcoreapp2.1\Truescriber.DAL.csproj.CopyComplete
+E:\gitlab\Truescriber\Truescriber.DAL\bin\Debug\netcoreapp2.1\Microsoft.EntityFrameworkCore.Relational.dll
+E:\gitlab\Truescriber\Truescriber.DAL\bin\Debug\netcoreapp2.1\Microsoft.EntityFrameworkCore.SqlServer.dll
+E:\gitlab\Truescriber\Truescriber.DAL\bin\Debug\netcoreapp2.1\Microsoft.EntityFrameworkCore.Relational.xml
+E:\gitlab\Truescriber\Truescriber.DAL\bin\Debug\netcoreapp2.1\Microsoft.EntityFrameworkCore.SqlServer.xml

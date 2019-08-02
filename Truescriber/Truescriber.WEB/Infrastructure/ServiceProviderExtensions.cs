@@ -24,6 +24,7 @@ namespace Truescriber.WEB.Infrastructure
                 })
                 .AddEntityFrameworkStores<TruescriberContext>()
                 .AddDefaultTokenProviders();
+            
         }   
 
         public static void AddMvcService(this IServiceCollection services)

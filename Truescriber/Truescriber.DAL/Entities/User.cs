@@ -5,18 +5,35 @@ namespace Truescriber.DAL.Entities
 {
     public class User : IdentityUser
     {
-        public User()
+        protected User()
         {
         }
 
-        private string Name { get; set; }
-        private string Surname { get; set; }
+        public User(string userName)
+        {
+            Email = userName;
+            UserName = userName;
+            Online = false;
+        }
 
-        private string Login { get; set; }
-        private string Password { get; set; }
+        public string Name { get; protected set; }
+        public string Surname { get; protected set; }
 
-        public bool Online { get; set; }
+        public string Login { get; protected set; }
+        public string Password { get; protected set; }
 
-        private ICollection<Task> Tasks { get; set; }
+        public bool Online { get; protected set; }
+
+        protected virtual ICollection<Task> Tasks { get; set; }
+
+        public void GoOnline()
+        {
+            Online = true;
+        }
+
+        public void GoOffline()
+        {
+            Online = false;
+        }
     }
 }

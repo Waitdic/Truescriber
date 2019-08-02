@@ -1,12 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Truescriber.DAL.EFContext;
-using Truescriber.DAL.Entities;
 using Truescriber.DAL.Interfaces;
+using Task = Truescriber.DAL.Entities.Task;
 
 namespace Truescriber.DAL.Repositories
 {
-    public class TaskRepository :IRepository<Task>
+    public class TaskRepository : IRepository<Task>
     {
         private TruescriberContext db;
 
@@ -21,30 +23,48 @@ namespace Truescriber.DAL.Repositories
 
         public Task Get(int id)
         {
+            CheckId(id);
             return db.Tasks.Find(id);
         }
 
-        public void Create(Task task)
+        public async void Create(Task task)
         {
-            db.Tasks.Add(task);
-            //db.SaveChangesAsync();
+            TaskValidation(task);
+            await db.Tasks.AddAsync(task);
+        }
+
+        public IEnumerable<Task> Find(Func<Task, Boolean> predicate)
+        {
+            return db.Tasks.Where(predicate).ToList(); ;
         }
 
         public void Update(Task task)
         {
+            TaskValidation(task);
             db.Entry(task).State = EntityState.Modified;
         }
 
-        public void Delete(int id)
+        public async void Delete(int id)
         {
+            CheckId(id);
             var task = db.Tasks.Find(id);
-            if (task == null) return;
 
-            var file = task.File;
-            if (file != null)
-                db.Files.Remove(file);
+            if (task == null)
+                throw new ArgumentException("Task not found");
 
             db.Tasks.Remove(task);
+        }
+
+        private void CheckId(int id)
+        {
+            if (id == 0)
+                throw new ArgumentException("Id cannot be null");
+        }
+
+        private void TaskValidation(Task task)
+        {
+            if (task == null)
+                throw new ArgumentException("Task cannot be null");
         }
     }
 }

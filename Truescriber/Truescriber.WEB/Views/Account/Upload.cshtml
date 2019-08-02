@@ -1,0 +1,33 @@
+﻿@model Truescriber.BLL.UploadModel.TaskModel;
+<h3 align="center">Create task</h3>
+<div align="center">
+    <form method="post" asp-controller="Account" asp-action="Upload" enctype="multipart/form-data">
+        <div align="center" asp-validation-summary="ModelOnly"></div>
+        
+        <table>
+            <tr>
+                <td> <label asp-for="TaskName" class="text-primary btn-group-lg"> Task name:</label> </td>
+                <td>
+                    <input asp-for="TaskName"
+                           type="text"
+                           class="form-control"
+                           aria-label="Small"
+                           aria-describedby="inputGroup-sizing-default"
+                           value="@Model.TaskName"/>
+                </td>
+            </tr>
+            <tr>
+                <td><label class="text-primary btn-group-lg"> File:</label></td>
+                <td>
+                    <input asp-for="File" type="file" multiple
+                           name="File"
+                           class="text-primary btn-group-lg"/>
+                </td>
+            </tr>
+        </table>
+        <br />
+        <div align="center">
+            <input type="submit" class="btn btn-sm btn-success" value="Add task" />
+        </div>
+    </form>
+</div>

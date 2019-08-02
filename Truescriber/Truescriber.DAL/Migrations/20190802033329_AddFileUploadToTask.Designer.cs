@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Truescriber.DAL.EFContext;
 
 namespace Truescriber.DAL.Migrations
 {
     [DbContext(typeof(TruescriberContext))]
-    partial class TruescriberContextModelSnapshot : ModelSnapshot
+    [Migration("20190802033329_AddFileUploadToTask")]
+    partial class AddFileUploadToTask
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -143,7 +145,7 @@ namespace Truescriber.DAL.Migrations
 
                     b.Property<string>("Length");
 
-                    b.Property<long>("Size");
+                    b.Property<string>("Size");
 
                     b.Property<DateTime>("StartTime");
 

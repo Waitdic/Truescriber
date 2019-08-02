@@ -5,6 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20190731042354_Initial.cs" />
+    <Compile Remove="Migrations\20190731042354_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20190731042641_Initial.cs" />
+    <Compile Remove="Migrations\20190731042641_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20190731042920_Initial.cs" />
+    <Compile Remove="Migrations\20190731042920_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20190731044020_RenameToFmt.cs" />
+    <Compile Remove="Migrations\20190731044020_RenameToFmt.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.2.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.1.7" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.1.6" />

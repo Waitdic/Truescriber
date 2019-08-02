@@ -1,9 +1,14 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Truescriber.DAL.Entities;
+using Truescriber.DAL.Interfaces;
 using Truescriber.WEB.Infrastructure;
+using Truescriber.DAL.Repositories;
 
 namespace Truescriber.WEB
 {
@@ -29,6 +34,7 @@ namespace Truescriber.WEB
 
             services.AddRegistry(connection);
             services.AddMvcService();
+            services.AddTransient<IRepository<Task>, TaskRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

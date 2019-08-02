@@ -7,12 +7,11 @@ namespace Truescriber.DAL.EFContext
     public class TruescriberContext : IdentityDbContext<User>
     {
         public DbSet<Task> Tasks { get; set; }
-        public DbSet<File> Files { get; set; }
 
         public TruescriberContext(DbContextOptions<TruescriberContext> options)
             :base(options)
         {
-           // Database.EnsureCreated();
+            //Database.EnsureCreated();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Truescriber.DAL.Entities
@@ -12,13 +13,15 @@ namespace Truescriber.DAL.Entities
         public Task(
             DateTime startTime,
             DateTime updateTime,
-            string taskName, 
+            string taskName,
             string fileName,
             string format,
             long size,
             string userId
         )
         {
+            ValidationFormat(format);
+
             StartTime = startTime;
             UpdateTime = updateTime;
             TaskName = taskName;
@@ -43,8 +46,7 @@ namespace Truescriber.DAL.Entities
         public byte[] File { get; protected set; }
 
         public string UserId { get; protected set; }
-        [ForeignKey("UserId")]
-        public virtual User User { get; set; }
+        [ForeignKey("UserId")] public virtual User User { get; set; }
 
 
         public void ChangeStatus(string status)
@@ -60,7 +62,7 @@ namespace Truescriber.DAL.Entities
             var updateTime = DateTime.UtcNow;
             if (updateTime < StartTime)
                 throw new ArgumentException("Time can not be earlier");
-            
+
             UpdateTime = updateTime;
         }
 
@@ -71,6 +73,7 @@ namespace Truescriber.DAL.Entities
 
             TaskName = taskName;
         }
+
         public void AddFile(byte[] file)
         {
             File = file;
@@ -81,5 +84,22 @@ namespace Truescriber.DAL.Entities
             Status = "Uploaded to server";
         }
 
+        public void ValidationFormat(string format)
+        {
+            var audioFormats = new List<string>()
+            {
+                "audio/flac",
+                "audio/raw",
+                "audio/wav",
+                "audio/mp3",
+                "audio/arm-wb",
+                "audio/ogg",
+            };
+            string form = audioFormats.Find((x) => x == format);
+
+            if (string.IsNullOrWhiteSpace(form))
+                throw new ArgumentException(
+                    "Wrong format. Server support: audio/flac, audio/raw, audio/wav, audio/mp3, audio/arm-wb, audio/ogg");
+        }
     }
 }

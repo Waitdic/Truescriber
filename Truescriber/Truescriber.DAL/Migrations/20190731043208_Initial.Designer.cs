@@ -10,8 +10,8 @@ using Truescriber.DAL.EFContext;
 namespace Truescriber.DAL.Migrations
 {
     [DbContext(typeof(TruescriberContext))]
-    [Migration("20190729071355_CreateDomainEntities")]
-    partial class CreateDomainEntities
+    [Migration("20190731043208_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -137,7 +137,21 @@ namespace Truescriber.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("FileName");
+
+                    b.Property<string>("Format");
+
+                    b.Property<string>("Length");
+
+                    b.Property<string>("Link");
+
+                    b.Property<string>("Size");
+
+                    b.Property<int>("TaskId");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("TaskId");
 
                     b.ToTable("Files");
                 });
@@ -148,15 +162,19 @@ namespace Truescriber.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("FileId");
+                    b.Property<int>("FileId");
 
-                    b.Property<string>("UserId1");
+                    b.Property<DateTime>("StartTime");
+
+                    b.Property<string>("Status");
+
+                    b.Property<DateTime>("UpdateTime");
+
+                    b.Property<string>("UserId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FileId");
-
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Tasks");
                 });
@@ -180,6 +198,10 @@ namespace Truescriber.DAL.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
 
+                    b.Property<string>("Login");
+
+                    b.Property<string>("Name");
+
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256);
 
@@ -188,6 +210,8 @@ namespace Truescriber.DAL.Migrations
 
                     b.Property<bool>("Online");
 
+                    b.Property<string>("Password");
+
                     b.Property<string>("PasswordHash");
 
                     b.Property<string>("PhoneNumber");
@@ -195,6 +219,8 @@ namespace Truescriber.DAL.Migrations
                     b.Property<bool>("PhoneNumberConfirmed");
 
                     b.Property<string>("SecurityStamp");
+
+                    b.Property<string>("Surname");
 
                     b.Property<bool>("TwoFactorEnabled");
 
@@ -259,15 +285,19 @@ namespace Truescriber.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("Truescriber.DAL.Entities.File", b =>
+                {
+                    b.HasOne("Truescriber.DAL.Entities.Task", "Task")
+                        .WithMany()
+                        .HasForeignKey("TaskId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("Truescriber.DAL.Entities.Task", b =>
                 {
-                    b.HasOne("Truescriber.DAL.Entities.File", "File")
-                        .WithMany()
-                        .HasForeignKey("FileId");
-
                     b.HasOne("Truescriber.DAL.Entities.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

@@ -72,7 +72,7 @@ using Truescriber.WEB.Models;
             WriteLiteral("\r\n    <div align=\"center\">\r\n        <br />\r\n        <div align=\"right\">\r\n            <table>\r\n                <tr>\r\n                    <td>\r\n                        ");
             EndContext();
             BeginContext(263, 196, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f1026718a1044862aa87942915a16925", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "af4768579fc4441bb04d1ddf305f6e61", async() => {
                 BeginContext(328, 124, true);
                 WriteLiteral("\r\n                            <input type=\"submit\" class=\"btn btn-sm btn-danger\" value=\"Logout\" />\r\n                        ");
                 EndContext();
@@ -100,7 +100,7 @@ using Truescriber.WEB.Models;
             WriteLiteral("\r\n                    </td>\r\n                    <td>\r\n                        ");
             EndContext();
             BeginContext(538, 197, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2554579b1bcf43e78be949b6db928f72", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "04d8ef566b0b48f59e56faee778a81d0", async() => {
                 BeginContext(601, 127, true);
                 WriteLiteral("\r\n                            <input type=\"submit\" class=\"btn btn-sm btn-success\" value=\"Add task\" />\r\n                        ");
                 EndContext();
@@ -211,12 +211,12 @@ using Truescriber.WEB.Models;
             WriteLiteral("</td>\r\n                    <td>\r\n                        ");
             EndContext();
             BeginContext(1789, 451, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b108f9877b1d4e54b8cfddab66c81638", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "138daae1b3d24d0cbb5c9573cd3cb07b", async() => {
                 BeginContext(1858, 30, true);
                 WriteLiteral("\r\n                            ");
                 EndContext();
                 BeginContext(1888, 121, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "180ae1e7542140688f479b2363c1162e", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0542136742e14bb7b119586db10beda4", async() => {
                     BeginContext(2001, 4, true);
                     WriteLiteral("Edit");
                     EndContext();
@@ -313,7 +313,7 @@ using Truescriber.WEB.Models;
             WriteLiteral("            ");
             EndContext();
             BeginContext(2519, 245, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cd79e8e2cca842a497b2f3650182df99", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1840d2f0ff654e158d946cfc50a06c5a", async() => {
                 BeginContext(2658, 102, true);
                 WriteLiteral("\r\n                <i class=\"glyphicon glyphicon-chevron-left\"></i>\r\n                Past\r\n            ");
                 EndContext();
@@ -366,7 +366,7 @@ using Truescriber.WEB.Models;
             WriteLiteral("            ");
             EndContext();
             BeginContext(2849, 246, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "078adffdf8044385842d6d2bcb1cfd77", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "65972a3fd5184701975d65a09fa41a25", async() => {
                 BeginContext(2988, 103, true);
                 WriteLiteral("\r\n                Next\r\n                <i class=\"glyphicon glyphicon-chevron-right\"></i>\r\n            ");
                 EndContext();

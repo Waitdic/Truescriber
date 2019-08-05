@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -101,7 +100,7 @@ namespace Truescriber.WEB.Controllers
             //TaskViewModel - model that converted size
             var enumerable = tasks as Task[] ?? tasks.ToArray();        // Form an array of tasks;
             var count = enumerable.Count();                             // Number of all tasks;
-            var taskViewModel = new TaskViewModel[] { };                // Create array of TaskViewModel;
+            var taskViewModel = new TaskViewModel[count];               // Create array of TaskViewModel;
             for (var i = 0; i < count; i++)
             {
                 taskViewModel[i] = new TaskViewModel(enumerable[i]);    //Give each task a converted size;
@@ -128,6 +127,12 @@ namespace Truescriber.WEB.Controllers
         public async Task<IActionResult> Upload(TaskModel taskModel)
         {
             if (!ModelState.IsValid) return View(taskModel);
+            var result = taskModel.ValidationFormat(taskModel.File.ContentType);
+            if (!result)
+            {
+                ModelState.AddModelError("", taskModel.GetErrorMessage());
+                return View(taskModel);
+            }
 
             // Creating task;
             // Uploading file to database;

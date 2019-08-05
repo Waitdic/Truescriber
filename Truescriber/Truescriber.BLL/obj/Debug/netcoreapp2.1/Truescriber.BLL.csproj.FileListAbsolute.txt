@@ -18,11 +18,11 @@ E:\gitlab\Truescriber\Truescriber.BLL\bin\Debug\netcoreapp2.1\Microsoft.EntityFr
 E:\gitlab\Truescriber\Truescriber.BLL\bin\Debug\netcoreapp2.1\Microsoft.EntityFrameworkCore.Relational.xml
 E:\gitlab\Truescriber\Truescriber.BLL\bin\Debug\netcoreapp2.1\Microsoft.EntityFrameworkCore.SqlServer.dll
 E:\gitlab\Truescriber\Truescriber.BLL\bin\Debug\netcoreapp2.1\Microsoft.EntityFrameworkCore.SqlServer.xml
-E:\gitlab\Truescriber\Truescriber.BLL\bin\Debug\netcoreapp2.1\Microsoft.AspNetCore.Mvc.Abstractions.dll
-E:\gitlab\Truescriber\Truescriber.BLL\bin\Debug\netcoreapp2.1\Microsoft.AspNetCore.Mvc.Core.dll
 E:\gitlab\Truescriber\Truescriber.BLL\bin\Debug\netcoreapp2.1\Microsoft.AspNetCore.Mvc.ViewFeatures.dll
 E:\gitlab\Truescriber\Truescriber.BLL\bin\Debug\netcoreapp2.1\Microsoft.AspNetCore.Razor.dll
-E:\gitlab\Truescriber\Truescriber.BLL\bin\Debug\netcoreapp2.1\Microsoft.AspNetCore.Mvc.Abstractions.xml
-E:\gitlab\Truescriber\Truescriber.BLL\bin\Debug\netcoreapp2.1\Microsoft.AspNetCore.Mvc.Core.xml
 E:\gitlab\Truescriber\Truescriber.BLL\bin\Debug\netcoreapp2.1\Microsoft.AspNetCore.Mvc.ViewFeatures.xml
 E:\gitlab\Truescriber\Truescriber.BLL\bin\Debug\netcoreapp2.1\Microsoft.AspNetCore.Razor.xml
+E:\gitlab\Truescriber\Truescriber.BLL\bin\Debug\netcoreapp2.1\Microsoft.AspNetCore.Mvc.Abstractions.dll
+E:\gitlab\Truescriber\Truescriber.BLL\bin\Debug\netcoreapp2.1\Microsoft.AspNetCore.Mvc.Core.dll
+E:\gitlab\Truescriber\Truescriber.BLL\bin\Debug\netcoreapp2.1\Microsoft.AspNetCore.Mvc.Abstractions.xml
+E:\gitlab\Truescriber\Truescriber.BLL\bin\Debug\netcoreapp2.1\Microsoft.AspNetCore.Mvc.Core.xml

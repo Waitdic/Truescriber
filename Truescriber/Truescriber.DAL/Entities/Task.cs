@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Truescriber.DAL.Entities
@@ -19,7 +18,7 @@ namespace Truescriber.DAL.Entities
             string userId
         )
         {
-            ValidationFormat(format);
+            //ValidationFormat(format);
 
             CreateTime = createTime;
             TaskName = taskName;
@@ -83,7 +82,7 @@ namespace Truescriber.DAL.Entities
             Status = "Uploaded to server";
         }
 
-        public void ValidationFormat(string format)
+        /*public void ValidationFormat(string format)
         {
             var audioFormats = new List<string>()
             {
@@ -93,12 +92,18 @@ namespace Truescriber.DAL.Entities
                 "audio/mp3",
                 "audio/arm-wb",
                 "audio/ogg",
+                "avi",
+                "mp4",
+                "mkv",
+                "flv"
             };
             string form = audioFormats.Find((x) => x == format);
 
             if (string.IsNullOrWhiteSpace(form))
-                throw new ArgumentException(
-                    "Wrong format. Server support: audio/flac, audio/raw, audio/wav, audio/mp3, audio/arm-wb, audio/ogg");
-        }
+                //throw new ArgumentException(
+                //    "Wrong format. Server support: audio/flac, audio/raw, audio/wav, audio/mp3, audio/arm-wb, audio/ogg");
+                //throw ModelState.AddModelError();
+                throw new ModelError();
+        }*/
     }
 }

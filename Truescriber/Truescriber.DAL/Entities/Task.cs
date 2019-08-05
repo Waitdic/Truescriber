@@ -11,8 +11,7 @@ namespace Truescriber.DAL.Entities
         }
 
         public Task(
-            DateTime startTime,
-            DateTime updateTime,
+            DateTime createTime,
             string taskName,
             string fileName,
             string format,
@@ -22,8 +21,7 @@ namespace Truescriber.DAL.Entities
         {
             ValidationFormat(format);
 
-            StartTime = startTime;
-            UpdateTime = updateTime;
+            CreateTime = createTime;
             TaskName = taskName;
             FileName = fileName;
             Format = format;
@@ -34,8 +32,9 @@ namespace Truescriber.DAL.Entities
 
         public int Id { get; protected set; }
 
+        public DateTime CreateTime { get; protected set; }
         public DateTime StartTime { get; protected set; }
-        public DateTime UpdateTime { get; protected set; }
+        public DateTime FinishTime { get; protected set; }
 
         public string Status { get; protected set; }
         public string TaskName { get; protected set; }
@@ -59,11 +58,11 @@ namespace Truescriber.DAL.Entities
 
         public void ChangeUpdateTime()
         {
-            var updateTime = DateTime.UtcNow;
-            if (updateTime < StartTime)
+            var finishTime = DateTime.UtcNow;
+            if (finishTime < StartTime)
                 throw new ArgumentException("Time can not be earlier");
 
-            UpdateTime = updateTime;
+            FinishTime = finishTime;
         }
 
         public void ChangeTaskName(string taskName)

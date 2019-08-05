@@ -11,7 +11,6 @@ namespace Truescriber.DAL.EFContext
         public TruescriberContext(DbContextOptions<TruescriberContext> options)
             :base(options)
         {
-            //Database.EnsureCreated();
         }
     }
 }

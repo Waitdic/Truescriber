@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -95,20 +96,23 @@ namespace Truescriber.WEB.Controllers
 
         public IActionResult Profile(int page = 1)
         {
-            var viewTasks = _taskRepository.Find(t => t.UserId == _userManager.GetUserId(User));
+            var tasks = _taskRepository.Find(t => t.UserId == _userManager.GetUserId(User));
+
+            //TaskViewModel - model that converted size
+            var enumerable = tasks as Task[] ?? tasks.ToArray();        // Form an array of tasks;
+            var count = enumerable.Count();                             // Number of all tasks;
+            var taskViewModel = new TaskViewModel[] { };                // Create array of TaskViewModel;
+            for (var i = 0; i < count; i++)
+            {
+                taskViewModel[i] = new TaskViewModel(enumerable[i]);    //Give each task a converted size;
+            }
 
             //Pagination
-            const int pageSize = 15;                                                    // Max item numbers to page;
-            var enumerable = viewTasks as Task[] ?? viewTasks.ToArray();                // Form an array of tasks;
-            var count = enumerable.Count();                                             // Number of all tasks;
-            var items = enumerable.Skip((page - 1) * pageSize).Take(pageSize).ToList(); // Skip the required number of items;
+            const int pageSize = 15;                                                        // Max item numbers to page;
+            var items = taskViewModel.Skip((page - 1) * pageSize).Take(pageSize).ToList();  // Skip the required number of items;
 
-            var pageViewModel = new PageViewModel(count, page, pageSize);
-            var viewModel = new ProfileViewModel
-            {
-                PageViewModel = pageViewModel,
-                Task = items
-            };
+            var pageViewModel = new PageViewModel(count, page, pageSize);          //Create new Page;
+            var viewModel = new ProfileViewModel(items, pageViewModel);                      // General ViewModel;
 
             return View(viewModel); 
         }
@@ -129,7 +133,6 @@ namespace Truescriber.WEB.Controllers
             // Uploading file to database;
             taskModel.UserId = _userManager.GetUserId(User);
             var task = new Task(
-                DateTime.UtcNow,
                 DateTime.UtcNow,
                 taskModel.TaskName,
                 taskModel.File.FileName,

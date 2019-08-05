@@ -1,11 +1,17 @@
 ﻿using System.Collections.Generic;
-using Truescriber.DAL.Entities;
 
 namespace Truescriber.BLL.PageModel
 {
     public class ProfileViewModel
     {
-        public IEnumerable<Task> Task { get; set; }
+        public IEnumerable<TaskViewModel> TaskViewModels { get; set; }
         public PageViewModel PageViewModel { get; set; }
+
+        public ProfileViewModel(IEnumerable<TaskViewModel> taskViewModel, PageViewModel pageViewModel)
+        {
+            TaskViewModels = taskViewModel;
+            PageViewModel = pageViewModel;
+
+        }
     }
 }

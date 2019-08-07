@@ -7,15 +7,16 @@ namespace Truescriber.BLL.PageModel
     public class TaskViewModel
     {
         public Task Task { get; set; }
-        public string Size { get; set; }
+        
+        public string FileSize { get; set; } //Size + suffix
 
         public TaskViewModel(Task task)
         {
             Task = task;
-            Size = Convert(task.Size);
+            FileSize = ConvertFromByte(task.Size);
         }
 
-        private string Convert(long taskSize)
+        private static string ConvertFromByte(long taskSize)
         {
             double size = taskSize;
             string[] format = { "B", "KB", "MB", "GB" };

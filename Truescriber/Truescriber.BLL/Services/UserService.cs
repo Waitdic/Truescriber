@@ -28,7 +28,7 @@ namespace Truescriber.BLL.Services
             await _signInManager.SignInAsync(user, false);
         }
 
-        public async void Login(LoginViewModel logModel)
+        public async Task Login(LoginViewModel logModel)
         {
             var user = await _userManager.FindByNameAsync(logModel.Login);
             logModel.UserId = user.Id;

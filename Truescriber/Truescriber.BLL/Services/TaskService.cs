@@ -61,14 +61,12 @@ namespace Truescriber.BLL.Services
             }
 
             _taskRepository.CreateDescription(uploadModel.TaskName, uploadModel.File, id);
-            //_taskRepository.SaveChange();
             return null;
         }
 
         public void DeleteTask(int id)
         {
             _taskRepository.Delete(id);
-            //_taskRepository.SaveChange();
         }
 
         public void EditTask(EditViewModel editModel)
@@ -90,7 +88,7 @@ namespace Truescriber.BLL.Services
 
         public string GetFormatError()
         {
-            return "Supported formats:" + FormatHelper.GetFormat();
+            return "Supported formats:" + FormatHelper.GetErrorMessage();
         }
 
     }

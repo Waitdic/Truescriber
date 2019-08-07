@@ -22,5 +22,20 @@ namespace Truescriber.BLL.Helpers
         {
             return Format;
         }
+        public string GetErrorMessage()
+        {
+            const string errorMessage = "Supported formats:" +
+                                        "\n .flac" +
+                                        "\n .raw" +
+                                        "\n .wav" +
+                                        "\n .mp3" +
+                                        "\n .arm-wb" +
+                                        "\n .ogg" +
+                                        "\n .avi" +
+                                        "\n .mp4" +
+                                        "\n .mkv" +
+                                        "\n .flv";
+            return errorMessage;
+        }
     }
 }

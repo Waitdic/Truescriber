@@ -1,6 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Truescriber.DAL.Entities;
@@ -95,12 +93,7 @@ namespace Truescriber.WEB.Controllers
                 return View(model);
             }
 
-            var user = await _userManager.FindByNameAsync(model.Login);
-            model.UserId = user.Id;
-            user.GoOnline();
-            await _userManager.UpdateAsync(user);
-
-            //_userService.Login(model);
+            await _userService.Login(model);
             return RedirectToAction("Profile");
         }
 
@@ -119,8 +112,8 @@ namespace Truescriber.WEB.Controllers
         [HttpPost]
         public ActionResult Upload(UploadViewModel uploadModel)
         {
-           var modelState = ModelState;
-           var result = _taskService.UploadFile(_userManager.GetUserId(User), uploadModel, modelState);
+           //var modelState = ModelState;
+           var result = _taskService.UploadFile(_userManager.GetUserId(User), uploadModel, ModelState);
 
            if (result != null)
                return View(uploadModel);

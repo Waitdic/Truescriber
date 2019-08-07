@@ -7,7 +7,7 @@ namespace Truescriber.BLL.Interfaces
     public interface IUserService
     {
         void Register(User user);
-        void Login(LoginViewModel item);
+        Task Login(LoginViewModel item);
         Task Logout(string id);
     }
 }

@@ -4,7 +4,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Truescriber.DAL.Entities;
 using Microsoft.AspNetCore.Identity;
+using Truescriber.BLL.Interfaces;
+using Truescriber.BLL.Services;
 using Truescriber.DAL.EFContext;
+using Truescriber.DAL.Interfaces;
+using Truescriber.DAL.Repositories;
 
 namespace Truescriber.WEB.Infrastructure
 {
@@ -35,6 +39,13 @@ namespace Truescriber.WEB.Infrastructure
         public static void AddMvcService(this IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+        }
+
+        public static void AddInterfaces(this IServiceCollection services)
+        {
+            services.AddTransient<IRepository<Task>, TaskRepository>();
+            services.AddTransient<ITaskService, TaskService>();
+            services.AddTransient<IUserService, UserService>();
         }
     }
 }

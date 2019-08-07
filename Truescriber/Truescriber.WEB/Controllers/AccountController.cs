@@ -112,8 +112,7 @@ namespace Truescriber.WEB.Controllers
         [HttpPost]
         public ActionResult Upload(UploadViewModel uploadModel)
         {
-           //var modelState = ModelState;
-           var result = _taskService.UploadFile(_userManager.GetUserId(User), uploadModel, ModelState);
+            var result = _taskService.UploadFile(_userManager.GetUserId(User), uploadModel, ModelState);
 
            if (result != null)
                return View(uploadModel);

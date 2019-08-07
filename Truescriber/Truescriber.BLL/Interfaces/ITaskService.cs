@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Truescriber.BLL.EditModel;
+﻿using Truescriber.BLL.EditModel;
 using Truescriber.BLL.PageModel;
 using Truescriber.BLL.UploadModel;
 using Microsoft.AspNetCore.Mvc.ModelBinding;

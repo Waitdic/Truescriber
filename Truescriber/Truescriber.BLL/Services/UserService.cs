@@ -1,7 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Truescriber.BLL.IdentityModels;
 using Truescriber.BLL.Interfaces;
 using Truescriber.DAL.Entities;

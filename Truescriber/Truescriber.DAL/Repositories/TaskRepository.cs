@@ -36,7 +36,7 @@ namespace Truescriber.DAL.Repositories
             SaveChange();
         }
 
-        public IEnumerable<Task> Find(Func<Task, Boolean> predicate)
+        public IEnumerable<Task> Find(Func<Task, bool> predicate)
         {
             return db.Tasks.Where(predicate).ToList(); ;
         }
@@ -58,9 +58,6 @@ namespace Truescriber.DAL.Repositories
             db.Tasks.Remove(task);
             SaveChange();
         }
-
-        //public async System.Threading.Tasks.Task SaveChange() =>
-        //    await db.SaveChangesAsync();
 
         public void SaveChange()
         {
@@ -86,13 +83,13 @@ namespace Truescriber.DAL.Repositories
             Create(task);
         }
 
-        private void CheckId(int id)
+        private static void CheckId(int id)
         {
             if (id == 0)
                 throw new ArgumentException("Id cannot be null");
         }
 
-        private void TaskValidation(Task task)
+        private static void TaskValidation(Task task)
         {
             if (task == null)
                 throw new ArgumentException("Task cannot be null");

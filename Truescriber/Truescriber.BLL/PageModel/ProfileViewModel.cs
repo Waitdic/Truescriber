@@ -11,7 +11,6 @@ namespace Truescriber.BLL.PageModel
         {
             TaskViewModels = taskViewModel;
             PageViewModel = pageViewModel;
-
         }
     }
 }

@@ -3,7 +3,7 @@
 
 namespace Truescriber.BLL.IdentityModels
 {
-    public class LoginModel
+    public class LoginViewModel
     {
         [Required]
         [Display(Name = "Login")]

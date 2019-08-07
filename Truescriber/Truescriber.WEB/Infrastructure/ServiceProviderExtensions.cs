@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Truescriber.DAL.Entities;
 using Microsoft.AspNetCore.Identity;
 using Truescriber.DAL.EFContext;
-using Truescriber.WEB.Models;
 
 namespace Truescriber.WEB.Infrastructure
 {
@@ -24,7 +24,12 @@ namespace Truescriber.WEB.Infrastructure
                 })
                 .AddEntityFrameworkStores<TruescriberContext>()
                 .AddDefaultTokenProviders();
-            
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options => 
+                {
+                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+                });
         }   
 
         public static void AddMvcService(this IServiceCollection services)

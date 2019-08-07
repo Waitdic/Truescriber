@@ -1,6 +1,13 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
+public enum Status
+{
+    UploadToServer,
+    Processed,
+    Finished
+};
+
 namespace Truescriber.DAL.Entities
 {
     public class Task
@@ -18,13 +25,10 @@ namespace Truescriber.DAL.Entities
             string userId
         )
         {
-            //ValidationFormat(format);
-
             CreateTime = createTime;
             TaskName = taskName;
             FileName = fileName;
             Format = format;
-            //Length = length;
             Size = size;
             UserId = userId;
         }
@@ -55,13 +59,10 @@ namespace Truescriber.DAL.Entities
             Status = status;
         }
 
-        public void ChangeUpdateTime()
+        public void ChangeCreateTime()
         {
-            var finishTime = DateTime.UtcNow;
-            if (finishTime < StartTime)
-                throw new ArgumentException("Time can not be earlier");
-
-            FinishTime = finishTime;
+            var createTime = DateTime.UtcNow;
+            CreateTime = createTime;
         }
 
         public void ChangeTaskName(string taskName)
@@ -77,33 +78,9 @@ namespace Truescriber.DAL.Entities
             File = file;
         }
 
-        public void StatusUploadServer()
+        public void ChangeStatus(Status status)
         {
-            Status = "Uploaded to server";
+            Status = status.ToString();
         }
-
-        /*public void ValidationFormat(string format)
-        {
-            var audioFormats = new List<string>()
-            {
-                "audio/flac",
-                "audio/raw",
-                "audio/wav",
-                "audio/mp3",
-                "audio/arm-wb",
-                "audio/ogg",
-                "avi",
-                "mp4",
-                "mkv",
-                "flv"
-            };
-            string form = audioFormats.Find((x) => x == format);
-
-            if (string.IsNullOrWhiteSpace(form))
-                //throw new ArgumentException(
-                //    "Wrong format. Server support: audio/flac, audio/raw, audio/wav, audio/mp3, audio/arm-wb, audio/ogg");
-                //throw ModelState.AddModelError();
-                throw new ModelError();
-        }*/
     }
 }

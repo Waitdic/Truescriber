@@ -3,68 +3,67 @@
     ViewData["Title"] = "Home Page";
 }
 
-    <div align="center">
-        <br />
-        <div align="right">
-            <table>
-                <tr>
-                    <td>
-                        <form method="post" asp-controller="Account" asp-action="Logout">
-                            <input type="submit" class="btn btn-sm btn-danger" value="Logout" />
-                        </form>
-                    </td>
-                    <td>
-                        <form method="get" sp-controller="Account" asp-action="Upload">
-                            <input type="submit" class="btn btn-sm btn-success" value="Add task" />
-                        </form>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="bg-primary"><h4>Tasks</h4></div>
-        <table class="table table-bordered">
+<div align="center">
+    <br />
+    <div align="right">
+        <table>
             <tr>
-                <th scope="col">Name task</th>
-                <th scope="col">Name file</th>
-                <th scope="col">Specifications</th>
-                <th scope="col">Time</th>
-                <th scope="col">Status</th>
-                <th></th>
+                <td>
+                    <form method="post" asp-controller="Account" asp-action="Logout">
+                        <input type="submit" class="btn btn-sm btn-danger" value="Logout" />
+                    </form>
+                </td>
+                <td>
+                    <form method="get" sp-controller="Account" asp-action="Upload">
+                        <input type="submit" class="btn btn-sm btn-success" value="Add task" />
+                    </form>
+                </td>
             </tr>
-            @foreach (var task in Model.TaskViewModels)
-            {
-                <tr>
-                    <td>@task.Task.TaskName</td>
-                    <td>@task.Task.FileName</td>
-                    <td>
-                        Format: @task.Task.Format <br />
-                        Size: @task.Size
-                    </td>
-                    <td>
-                        Start time: @task.Task.CreateTime <br/>
-                    </td>
-                    <td>@task.Task.Status</td>
-                    <td>
-                        <form asp-action="Delete" asp-route-id="@task.Task.Id" method="post">
-                            <a class="btn btn-sm btn-primary" asp-action="Edit"
-                               asp-route-id="@task.Task.Id">Edit</a>
-                            <button type="submit"
-                                    class="btn btn-sm btn-danger">
-                                Delete
-                            </button>
-                        </form>
-                    </td>
-
-                </tr>
-            }
         </table>
-        <br />
+    </div>
+    <div class="bg-primary"><h4>Tasks</h4></div>
+    <table class="table table-bordered">
+        <tr>
+            <th scope="col">Name task</th>
+            <th scope="col">Name file</th>
+            <th scope="col">Specifications</th>
+            <th scope="col">Time</th>
+            <th scope="col">Status</th>
+            <th></th>
+        </tr>
+        @foreach (var task in Model.TaskViewModels)
+        {
+            <tr>
+                <td>@task.Task.TaskName</td>
+                <td>@task.Task.FileName</td>
+                <td>
+                    Format: @task.Task.Format <br />
+                    Size: @task.Size
+                </td>
+                <td>
+                    Start time: @task.Task.CreateTime <br />
+                </td>
+                <td>@task.Task.Status</td>
+                <td>
+                    <form asp-action="Delete" asp-route-id="@task.Task.Id" method="post">
+                        <a class="btn btn-sm btn-primary" asp-action="Edit"
+                           asp-route-id="@task.Task.Id">Edit</a>
+                        <button type="submit"
+                                class="btn btn-sm btn-danger">
+                            Delete
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </table>
+    <br />
+    <div align="center">
+        <p>@Model.PageViewModel.PageNumber</p>
+    </div>
 
-        <div align="center">
-            <p>@Model.PageViewModel.PageNumber</p>
-        </div>
 
-        @if (Model.PageViewModel.HasPreviousPage)
+    @if (Model.PageViewModel.HasPreviousPage)
         {
             <a asp-action="Profile"
                asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
@@ -83,4 +82,5 @@
                 <i class="glyphicon glyphicon-chevron-right"></i>
             </a>
         }
-    </div>
+        
+</div>

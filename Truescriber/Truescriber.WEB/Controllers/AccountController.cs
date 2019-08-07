@@ -1,15 +1,13 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Truescriber.DAL.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Truescriber.BLL.EditModel;
 using Truescriber.BLL.IdentityModels;
-using Truescriber.BLL.PageModel;
-using Truescriber.DAL.EFContext;
+using Truescriber.BLL.Interfaces;
 using Truescriber.BLL.UploadModel;
 using Truescriber.DAL.Interfaces;
 using Task = Truescriber.DAL.Entities.Task;
@@ -20,22 +18,24 @@ namespace Truescriber.WEB.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-        private readonly TruescriberContext db;
-        private IRepository<Task> _taskRepository;
+        private readonly IRepository<Task> _taskRepository;
+        private readonly ITaskService _taskService;
+        private readonly IUserService _userService;
 
         public AccountController(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
-            TruescriberContext context,
-            IRepository<Task> taskRepository
+            IRepository<Task> taskRepository,
+            ITaskService taskService,
+            IUserService userService
         )
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            db = context;
             _taskRepository = taskRepository;
+            _taskService = taskService;
+            _userService = userService;
         }
-
 
         [HttpGet]
         public IActionResult Register()
@@ -46,7 +46,9 @@ namespace Truescriber.WEB.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
-            if (!ModelState.IsValid) return View(model);
+            if (!ModelState.IsValid)
+                return View(model);
+
             var user = new User(model.Email);
             var result = await _userManager.CreateAsync(user, model.Password);
 
@@ -59,25 +61,33 @@ namespace Truescriber.WEB.Controllers
                 }
             }
 
-            await _signInManager.SignInAsync(user, false);
+            _userService.Register(user);
             return RedirectToAction("Login", "Account");
         }
-
 
         [Authorize]
         [AllowAnonymous]
         public IActionResult Login()
         {
-            return View(new LoginModel { });
+            return View(new LoginViewModel { });
         }
 
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginModel model)
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
-            if (!ModelState.IsValid) return View(model);
-            var result = await _signInManager.PasswordSignInAsync(model.Login, model.Password, true, false);
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "Введены не все данные!");
+                return View(model);
+            }
+
+            var result = await _signInManager.PasswordSignInAsync(
+                model.Login,
+                model.Password,
+                true,
+                false);
 
             if (!result.Succeeded)
             {
@@ -89,79 +99,38 @@ namespace Truescriber.WEB.Controllers
             model.UserId = user.Id;
             user.GoOnline();
             await _userManager.UpdateAsync(user);
+
+            //_userService.Login(model);
             return RedirectToAction("Profile");
         }
 
-
         public IActionResult Profile(int page = 1)
         {
-            var tasks = _taskRepository.Find(t => t.UserId == _userManager.GetUserId(User));
-
-            //TaskViewModel - model that converted size
-            var enumerable = tasks as Task[] ?? tasks.ToArray();        // Form an array of tasks;
-            var count = enumerable.Count();                             // Number of all tasks;
-            var taskViewModel = new TaskViewModel[count];               // Create array of TaskViewModel;
-            for (var i = 0; i < count; i++)
-            {
-                taskViewModel[i] = new TaskViewModel(enumerable[i]);    //Give each task a converted size;
-            }
-
-            //Pagination
-            const int pageSize = 15;                                                        // Max item numbers to page;
-            var items = taskViewModel.Skip((page - 1) * pageSize).Take(pageSize).ToList();  // Skip the required number of items;
-
-            var pageViewModel = new PageViewModel(count, page, pageSize);          //Create new Page;
-            var viewModel = new ProfileViewModel(items, pageViewModel);                      // General ViewModel;
-
+            var viewModel = _taskService.CreateProfile(page, _userManager.GetUserId(User));
             return View(viewModel); 
         }
-
 
         [HttpGet]
         public IActionResult Upload()
         {
-            return View(new TaskModel{});
+            return View(new UploadViewModel{});
         }
 
         [HttpPost]
-        public async Task<IActionResult> Upload(TaskModel taskModel)
+        public ActionResult Upload(UploadViewModel uploadModel)
         {
-            if (!ModelState.IsValid) return View(taskModel);
-            var result = taskModel.ValidationFormat(taskModel.File.ContentType);
-            if (!result)
-            {
-                ModelState.AddModelError("", taskModel.GetErrorMessage());
-                return View(taskModel);
-            }
+           var modelState = ModelState;
+           var result = _taskService.UploadFile(_userManager.GetUserId(User), uploadModel, modelState);
 
-            // Creating task;
-            // Uploading file to database;
-            taskModel.UserId = _userManager.GetUserId(User);
-            var task = new Task(
-                DateTime.UtcNow,
-                taskModel.TaskName,
-                taskModel.File.FileName,
-                taskModel.File.ContentType,
-                taskModel.File.Length,
-                taskModel.UserId);
-            task.StatusUploadServer(); // Changing status when file to upload server db;
+           if (result != null)
+               return View(uploadModel);
 
-            using (var binaryReader = new BinaryReader(taskModel.File.OpenReadStream()))
-            {
-                task.AddFile(binaryReader.ReadBytes((int)taskModel.File.Length));
-            }
-
-            _taskRepository.Create(task);
-            await db.SaveChangesAsync();
-
-            return RedirectToAction("Profile", "Account");
+           return RedirectToAction("Profile", "Account");
         }
 
-
-        public async Task<IActionResult> Delete(int id)
+        public ActionResult Delete(int id)
         {
-            _taskRepository.Delete(id);
-            await db.SaveChangesAsync();
+            _taskService.DeleteTask(id);
             return RedirectToAction("Profile");
         }
 
@@ -169,38 +138,25 @@ namespace Truescriber.WEB.Controllers
         public IActionResult Edit(int id)
         {
             var task = _taskRepository.Get(id);
-            return View(new EditModel
+            return View(new EditViewModel
             {
-                TaskName = task.TaskName, //Transfer the available data
-                TaskId = task.Id          //
+                TaskName = task.TaskName,
+                TaskId = task.Id          
             });
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(EditModel model)
+        public ActionResult Edit(EditViewModel model)
         {
-            var task = _taskRepository.Get(model.TaskId);
-
-            task.ChangeTaskName(model.TaskName);
-            task.ChangeUpdateTime() ;
-
-            _taskRepository.Update(task);
-            await db.SaveChangesAsync();
-
+            _taskService.EditTask(model);
             return RedirectToAction("Profile");
         }
 
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            user.GoOffline();
-
-            await _userManager.UpdateAsync(user);
-            await _signInManager.SignOutAsync();
-
+            await _userService.Logout(_userManager.GetUserId(User));
             return RedirectToAction("Login", "Account");
         }
-
     }
 }

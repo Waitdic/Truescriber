@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Truescriber.BLL.UploadModel
 {
-    public class TaskModel
+    public class UploadViewModel
     {
         [Required]
         [Display(Name = "TaskName")]
@@ -13,9 +13,10 @@ namespace Truescriber.BLL.UploadModel
         [Required]
         [Display(Name = "File")]
         public  IFormFile File { get; set; }
+
         public string UserId { get; set; }
 
-        public bool ValidationFormat(string format)
+        /*public bool FormatValid(string format)
         {
             var audioFormats = new List<string>()
             {
@@ -30,12 +31,12 @@ namespace Truescriber.BLL.UploadModel
                 "video/mkv",
                 "video/flv"
             };
-            string form = audioFormats.Find((x) => x == format);
+            var form = audioFormats.Find((x) => x == format);
 
             return !string.IsNullOrWhiteSpace(form);
-        }
+        }*/
 
-        public string GetErrorMessage()
+        /*public string GetErrorMessage()
         {
             const string errorMessage = "Supported formats:" +
                                         "\n .flac" +
@@ -49,6 +50,11 @@ namespace Truescriber.BLL.UploadModel
                                         "\n .mkv" +
                                         "\n .flv";
             return errorMessage;
+        }/*/
+
+        public void GetUser()
+        {
+
         }
     }
 }

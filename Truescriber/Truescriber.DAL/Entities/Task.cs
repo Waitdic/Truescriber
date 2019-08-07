@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-public enum Status
+public enum StatusValue
 {
     UploadToServer,
     Processed,
@@ -50,14 +50,6 @@ namespace Truescriber.DAL.Entities
         [ForeignKey("UserId")] public virtual User User { get; set; }
 
 
-        public void ChangeStatus(string status)
-        {
-            if (string.IsNullOrWhiteSpace(status))
-                throw new ArgumentException("Status cannot be null");
-
-            Status = status;
-        }
-
         public void ChangeCreateTime()
         {
             var createTime = DateTime.UtcNow;
@@ -77,7 +69,7 @@ namespace Truescriber.DAL.Entities
             File = file;
         }
 
-        public void ChangeStatus(Status status)
+        public void ChangeStatus(StatusValue status)
         {
             Status = status.ToString();
         }

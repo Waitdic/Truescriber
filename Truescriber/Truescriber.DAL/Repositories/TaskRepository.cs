@@ -78,7 +78,7 @@ namespace Truescriber.DAL.Repositories
             {
                 task.AddFile(binaryReader.ReadBytes((int)file.Length));
             }
-            task.ChangeStatus(Status.UploadToServer);
+            task.ChangeStatus(StatusValue.UploadToServer);
 
             Create(task);
         }

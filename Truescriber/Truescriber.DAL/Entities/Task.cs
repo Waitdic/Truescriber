@@ -43,7 +43,6 @@ namespace Truescriber.DAL.Entities
         public string TaskName { get; protected set; }
         public string FileName { get; protected set; }
         public string Format { get; protected set; }
-        public string Length { get; protected set; }
         public long Size { get; protected set; }
         public byte[] File { get; protected set; }
 

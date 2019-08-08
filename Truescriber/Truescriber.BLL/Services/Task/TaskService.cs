@@ -80,7 +80,7 @@ namespace Truescriber.BLL.Services.Task
 
         private static bool GetFormatValid(string format)
         {
-            var result = FormatHelper.GetFormat().Find((x) => x == format);
+            var result = FormatHelper.GetFormats().Find((x) => x == format);
             return !string.IsNullOrWhiteSpace(result);
         }
 

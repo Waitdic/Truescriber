@@ -38,22 +38,16 @@ namespace Truescriber.WEB.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
-            if (!ModelState.IsValid)
-                return View(model);
+            //if (!ModelState.IsValid) return View(model);
+            
+            //var user = new User(model.Email);
+            //var result = await _userManager.CreateAsync(user, model.Password);
 
-            var user = new User(model.Email);
-            var result = await _userManager.CreateAsync(user, model.Password);
+            //var userValid = await _userService.Register(user, result, ModelState);
 
-            if (!result.Succeeded)
-            {
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                    return View(model);
-                }
-            }
+            var userValid = await _userService.Register(model, ModelState);
+            if (userValid != true) return View(model);
 
-            _userService.Register(user);
             return RedirectToAction("Login", "Account");
         }
 
@@ -69,25 +63,15 @@ namespace Truescriber.WEB.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                ModelState.AddModelError("", "Fill in all the fields");
-                return View(model);
-            }
-
             var result = await _signInManager.PasswordSignInAsync(
                 model.Login,
                 model.Password,
                 true,
                 false);
 
-            if (!result.Succeeded)
-            {
-                ModelState.AddModelError("", "Incorrect login or password");
-                return View(model);
-            }
+            var test = await _userService.Login(model, result, ModelState);
+            if (test == false) return View(model);
 
-            await _userService.Login(model);
             return RedirectToAction("TaskList");
         }
 
@@ -107,9 +91,7 @@ namespace Truescriber.WEB.Controllers
         public ActionResult Upload(UploadViewModel uploadModel)
         {
             var result = _taskService.UploadFile(_userManager.GetUserId(User), uploadModel, ModelState);
-
-           if (result != null)
-               return View(uploadModel);
+            if (result != null) return View(uploadModel);
 
            return RedirectToAction("TaskList", "Account");
         }

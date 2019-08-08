@@ -1,44 +1,43 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Truescriber.BLL.EditModel;
-using Truescriber.BLL.Helpers;
 using Truescriber.BLL.Interfaces;
-using Truescriber.BLL.PageModel;
-using Truescriber.BLL.UploadModel;
+using Truescriber.BLL.Services.Models.PageModel;
+using Truescriber.BLL.Services.Task.Models;
+using Truescriber.Common.Helpers;
 using Truescriber.DAL.Interfaces;
-using Task = Truescriber.DAL.Entities.Task;
 
-namespace Truescriber.BLL.Services
+namespace Truescriber.BLL.Services.Task
 {
     public class TaskService : ITaskService
     {
-        private readonly IRepository<Task> _taskRepository;
-        public FormatHelper FormatHelper;
-        public TaskService(IRepository<Task> taskRep)
+        private readonly IRepository<DAL.Entities.Task> _taskRepository;
+        public static FormatHelper FormatHelper;
+
+        public TaskService(IRepository<DAL.Entities.Task> taskRep)
         {
             _taskRepository = taskRep;
             FormatHelper = new FormatHelper();
         }
 
-        public ProfileViewModel CreateProfile(int page, string userId)
+        public PagedTaskList CreateTaskList(int page, string userId)
         {
             const int pageSize = 15;
             var tasks = _taskRepository.Find(t => t.UserId == userId);
 
-            var enumerable = tasks as Task[] ?? tasks.ToArray();        // Form an array of tasks;
-            var count = enumerable.Count();                             // Number of all tasks;
-            var taskViewModel = new TaskViewModel[count];               // Create array of TaskViewModel;
+            var enumerable = tasks as DAL.Entities.Task[] ?? tasks.ToArray();           // Form an array of tasks;
+            var count = enumerable.Count();                                             // Number of all tasks;
+            var taskViewModel = new TaskViewModel[count];                               // Create array of TaskViewModel;
 
             for (var i = 0; i < count; i++)
             {
-                taskViewModel[i] = new TaskViewModel(enumerable[i]);    //Give each task a converted size;
+                taskViewModel[i] = new TaskViewModel(enumerable[i]);                    //Give each task a converted size;
             }
 
             var items = taskViewModel.Skip((page - 1) * pageSize).Take(pageSize).ToList();  // Skip the required number of items;
-            var pageViewModel = new PageViewModel(count, page, pageSize);          //Create new Page;
+            var pageViewModel = new PagedViewModel(count, page, pageSize);         //Create new Page;
 
-            var viewModel = new ProfileViewModel(items, pageViewModel);                      // General ViewModel;
+            var viewModel = new PagedTaskList(items, pageViewModel);                      // General ViewModel;
             return  viewModel;
         }
 
@@ -49,7 +48,7 @@ namespace Truescriber.BLL.Services
         ){
             if (!modelState.IsValid)
             {
-                modelState.AddModelError("", "Введены не все данные!");
+                modelState.AddModelError("", "Fill in all the fields");
                 return uploadModel;
             }
 
@@ -68,7 +67,7 @@ namespace Truescriber.BLL.Services
             _taskRepository.Delete(id);
         }
 
-        public void EditTask(EditViewModel editModel)
+        public void EditTask(EditTaskViewModel editModel)
         {
             if(editModel == null)
                 throw new ArgumentException("Model cannot be null");
@@ -79,15 +78,15 @@ namespace Truescriber.BLL.Services
             _taskRepository.SaveChange();
         }
 
-        public bool GetFormatValid(string format)
+        private static bool GetFormatValid(string format)
         {
             var result = FormatHelper.GetFormat().Find((x) => x == format);
             return !string.IsNullOrWhiteSpace(result);
         }
 
-        public string GetFormatError()
+        private static string GetFormatError()
         {
-            return "Supported formats:" + FormatHelper.GetErrorMessage();
+            return "Supported formats:" + FormatHelper.SupportedFormatsMessage();
         }
 
     }

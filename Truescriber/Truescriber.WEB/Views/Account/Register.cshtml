@@ -1,6 +1,6 @@
-﻿@model Truescriber.BLL.IdentityModels.RegisterViewModel
+﻿@model Truescriber.BLL.Services.User.IdentityModels.RegisterViewModel
 
-<h2>Регистрация нового пользователя</h2>
+    <h2>New User Registration</h2>
 <form method="post" asp-controller="Account" asp-action="Register">
     <div asp-validation-summary="ModelOnly"></div>
     <div>
@@ -19,6 +19,6 @@
         <span asp-validation-for="PasswordConfirm"></span>
     </div>
     <div>
-        <input type="submit" value="Регистрация" />
+        <input type="submit" value="Check in" />
     </div>
 </form>

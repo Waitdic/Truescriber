@@ -1,6 +1,6 @@
-﻿namespace Truescriber.BLL.EditModel
+﻿namespace Truescriber.BLL.Services.Task.Models
 {
-    public class EditViewModel
+    public class EditTaskViewModel
     {
         public int TaskId { get; set; }
         public string TaskName {get; set;}

@@ -6,6 +6,8 @@ using Truescriber.DAL.Entities;
 using Microsoft.AspNetCore.Identity;
 using Truescriber.BLL.Interfaces;
 using Truescriber.BLL.Services;
+using Truescriber.BLL.Services.Task;
+using Truescriber.BLL.Services.User;
 using Truescriber.DAL.EFContext;
 using Truescriber.DAL.Interfaces;
 using Truescriber.DAL.Repositories;

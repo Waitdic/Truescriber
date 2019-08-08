@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 
-namespace Truescriber.BLL.IdentityModels
+namespace Truescriber.BLL.Services.User.IdentityModels
 {
     public class LoginViewModel
     {
@@ -13,7 +13,5 @@ namespace Truescriber.BLL.IdentityModels
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
-
-        public string UserId { get; set; }
     }
 }

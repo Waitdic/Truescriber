@@ -1,4 +1,4 @@
-﻿using Truescriber.BLL.IdentityModels;
+﻿using Truescriber.BLL.Services.User.IdentityModels;
 using Truescriber.DAL.Entities;
 using Task = System.Threading.Tasks.Task;
 

@@ -84,6 +84,10 @@ dlldata.c
 *.pidb
 *.svclog
 *.scc
+*.pdb
+*.dll
+*.ide
+*.ide-wal
 
 # Chutzpah Test files
 _Chutzpah*
@@ -95,11 +99,14 @@ ipch/
 *.opensdf
 *.sdf
 *.cachefile
+*.dtbcache
+*.cache
 
 # Visual Studio profiler
 *.psess
 *.vsp
 *.vspx
+*.suo
 
 # TFS 2012 Local Workspace
 $tf/

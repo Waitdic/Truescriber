@@ -1301,6 +1301,16 @@
           "lib/netcoreapp2.1/_._": {}
         }
       },
+      "Truescriber.Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.1",
+        "compile": {
+          "bin/placeholder/Truescriber.Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Truescriber.Common.dll": {}
+        }
+      },
       "Truescriber.DAL/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.1",
@@ -3278,6 +3288,11 @@
         "version.txt"
       ]
     },
+    "Truescriber.Common/1.0.0": {
+      "type": "project",
+      "path": "../Truescriber.Common/Truescriber.Common.csproj",
+      "msbuildProject": "../Truescriber.Common/Truescriber.Common.csproj"
+    },
     "Truescriber.DAL/1.0.0": {
       "type": "project",
       "path": "../Truescriber.DAL/Truescriber.DAL.csproj",
@@ -3288,6 +3303,7 @@
     ".NETCoreApp,Version=v2.1": [
       "Microsoft.AspNet.Mvc >= 5.2.7",
       "Microsoft.NETCore.App >= 2.1.0",
+      "Truescriber.Common >= 1.0.0",
       "Truescriber.DAL >= 1.0.0"
     ]
   },
@@ -3324,6 +3340,9 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
+            "E:\\gitlab\\Truescriber\\Truescriber.Common\\Truescriber.Common.csproj": {
+              "projectPath": "E:\\gitlab\\Truescriber\\Truescriber.Common\\Truescriber.Common.csproj"
+            },
             "E:\\gitlab\\Truescriber\\Truescriber.DAL\\Truescriber.DAL.csproj": {
               "projectPath": "E:\\gitlab\\Truescriber\\Truescriber.DAL\\Truescriber.DAL.csproj"
             }

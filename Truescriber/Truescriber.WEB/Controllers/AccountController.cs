@@ -3,12 +3,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Truescriber.DAL.Entities;
 using Microsoft.AspNetCore.Authorization;
-using Truescriber.BLL.EditModel;
-using Truescriber.BLL.IdentityModels;
 using Truescriber.BLL.Interfaces;
-using Truescriber.BLL.UploadModel;
-using Truescriber.DAL.Interfaces;
-using Task = Truescriber.DAL.Entities.Task;
+using Truescriber.BLL.Services.Task.Models;
+using Truescriber.BLL.Services.User.IdentityModels;
 
 namespace Truescriber.WEB.Controllers
 {
@@ -16,21 +13,18 @@ namespace Truescriber.WEB.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-        private readonly IRepository<Task> _taskRepository;
         private readonly ITaskService _taskService;
         private readonly IUserService _userService;
 
         public AccountController(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
-            IRepository<Task> taskRepository,
             ITaskService taskService,
             IUserService userService
         )
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _taskRepository = taskRepository;
             _taskService = taskService;
             _userService = userService;
         }
@@ -77,7 +71,7 @@ namespace Truescriber.WEB.Controllers
         {
             if (!ModelState.IsValid)
             {
-                ModelState.AddModelError("", "Введены не все данные!");
+                ModelState.AddModelError("", "Fill in all the fields");
                 return View(model);
             }
 
@@ -89,17 +83,17 @@ namespace Truescriber.WEB.Controllers
 
             if (!result.Succeeded)
             {
-                ModelState.AddModelError("", "Неправильный логин и (или) пароль");
+                ModelState.AddModelError("", "Incorrect login or password");
                 return View(model);
             }
 
             await _userService.Login(model);
-            return RedirectToAction("Profile");
+            return RedirectToAction("TaskList");
         }
 
-        public IActionResult Profile(int page = 1)
+        public IActionResult TaskList(int page = 1)
         {
-            var viewModel = _taskService.CreateProfile(page, _userManager.GetUserId(User));
+            var viewModel = _taskService.CreateTaskList(page, _userManager.GetUserId(User));
             return View(viewModel); 
         }
 
@@ -117,31 +111,30 @@ namespace Truescriber.WEB.Controllers
            if (result != null)
                return View(uploadModel);
 
-           return RedirectToAction("Profile", "Account");
+           return RedirectToAction("TaskList", "Account");
         }
 
         public ActionResult Delete(int id)
         {
             _taskService.DeleteTask(id);
-            return RedirectToAction("Profile");
+            return RedirectToAction("TaskList");
         }
 
         [HttpGet]
-        public IActionResult Edit(int id)
+        public IActionResult Edit(int id, string taskName)
         {
-            var task = _taskRepository.Get(id);
-            return View(new EditViewModel
+            return View(new EditTaskViewModel
             {
-                TaskName = task.TaskName,
-                TaskId = task.Id          
+                TaskName = taskName,
+                TaskId = id          
             });
         }
 
         [HttpPost]
-        public ActionResult Edit(EditViewModel model)
+        public ActionResult Edit(EditTaskViewModel model)
         {
             _taskService.EditTask(model);
-            return RedirectToAction("Profile");
+            return RedirectToAction("TaskList");
         }
 
         [ValidateAntiForgeryToken]

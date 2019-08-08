@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 
-namespace Truescriber.BLL.Helpers
+namespace Truescriber.Common.Helpers
 {
     public class FormatHelper
     {
-        private List<string> Format { get; } = new List<string>()
+        private List<string> Formats { get; } = new List<string>()
         {
             "audio/flac",
             "audio/raw",
@@ -18,11 +18,11 @@ namespace Truescriber.BLL.Helpers
             "video/flv"
         };
 
-        public List<string> GetFormat()
+        public List<string> GetFormats()
         {
-            return Format;
+            return Formats;
         }
-        public string GetErrorMessage()
+        public string SupportedFormatsMessage()
         {
             const string errorMessage = "Supported formats:" +
                                         "\n .flac" +

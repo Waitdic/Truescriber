@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Truescriber.Common\Truescriber.Common.csproj" />
     <ProjectReference Include="..\Truescriber.DAL\Truescriber.DAL.csproj" />
   </ItemGroup>
 

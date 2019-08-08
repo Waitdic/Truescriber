@@ -32,6 +32,9 @@
         "frameworks": {
           "netcoreapp2.1": {
             "projectReferences": {
+              "E:\\gitlab\\Truescriber\\Truescriber.Common\\Truescriber.Common.csproj": {
+                "projectPath": "E:\\gitlab\\Truescriber\\Truescriber.Common\\Truescriber.Common.csproj"
+              },
               "E:\\gitlab\\Truescriber\\Truescriber.DAL\\Truescriber.DAL.csproj": {
                 "projectPath": "E:\\gitlab\\Truescriber\\Truescriber.DAL\\Truescriber.DAL.csproj"
               }
@@ -51,6 +54,60 @@
               "target": "Package",
               "version": "[5.2.7, )"
             },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.1.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "E:\\gitlab\\Truescriber\\Truescriber.Common\\Truescriber.Common.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\gitlab\\Truescriber\\Truescriber.Common\\Truescriber.Common.csproj",
+        "projectName": "Truescriber.Common",
+        "projectPath": "E:\\gitlab\\Truescriber\\Truescriber.Common\\Truescriber.Common.csproj",
+        "packagesPath": "C:\\Users\\Danis\\.nuget\\packages\\",
+        "outputPath": "E:\\gitlab\\Truescriber\\Truescriber.Common\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "E:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Danis\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.1": {
+          "dependencies": {
             "Microsoft.NETCore.App": {
               "suppressParent": "All",
               "target": "Package",

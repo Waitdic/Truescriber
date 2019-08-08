@@ -4704,6 +4704,7 @@
         "framework": ".NETCoreApp,Version=v2.1",
         "dependencies": {
           "Microsoft.AspNet.Mvc": "5.2.7",
+          "Truescriber.Common": "1.0.0",
           "Truescriber.DAL": "1.0.0"
         },
         "compile": {
@@ -4711,6 +4712,16 @@
         },
         "runtime": {
           "bin/placeholder/Truescriber.BLL.dll": {}
+        }
+      },
+      "Truescriber.Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.1",
+        "compile": {
+          "bin/placeholder/Truescriber.Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Truescriber.Common.dll": {}
         }
       },
       "Truescriber.DAL/1.0.0": {
@@ -12798,6 +12809,11 @@
       "type": "project",
       "path": "../Truescriber.BLL/Truescriber.BLL.csproj",
       "msbuildProject": "../Truescriber.BLL/Truescriber.BLL.csproj"
+    },
+    "Truescriber.Common/1.0.0": {
+      "type": "project",
+      "path": "../Truescriber.Common/Truescriber.Common.csproj",
+      "msbuildProject": "../Truescriber.Common/Truescriber.Common.csproj"
     },
     "Truescriber.DAL/1.0.0": {
       "type": "project",

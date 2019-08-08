@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
 
-namespace Truescriber.BLL.UploadModel
+namespace Truescriber.BLL.Services.Task.Models
 {
     public class UploadViewModel
     {
@@ -12,7 +12,5 @@ namespace Truescriber.BLL.UploadModel
         [Required]
         [Display(Name = "File")]
         public  IFormFile File { get; set; }
-
-        public string UserId { get; set; }
     }
 }

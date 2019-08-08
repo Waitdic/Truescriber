@@ -1,4 +1,4 @@
-﻿@model Truescriber.BLL.PageModel.ProfileViewModel;
+﻿@model Truescriber.BLL.Services.Models.PageModel.PagedTaskList;
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -46,8 +46,12 @@
                 <td>@task.Task.Status</td>
                 <td>
                     <form asp-action="Delete" asp-route-id="@task.Task.Id" method="post">
-                        <a class="btn btn-sm btn-primary" asp-action="Edit"
-                           asp-route-id="@task.Task.Id">Edit</a>
+                        <a class="btn btn-sm btn-primary"
+                           asp-action="Edit"
+                           asp-route-id="@task.Task.Id"
+                           asp-route-taskName="@task.Task.TaskName">
+                            Edit
+                        </a>
                         <button type="submit"
                                 class="btn btn-sm btn-danger">
                             Delete
@@ -59,24 +63,24 @@
     </table>
     <br />
     <div align="center">
-        <p>@Model.PageViewModel.PageNumber</p>
+        <p>@Model.PagedViewModel.PageNumber</p>
     </div>
 
 
-    @if (Model.PageViewModel.HasPreviousPage)
+    @if (Model.PagedViewModel.HasPreviousPage)
         {
-            <a asp-action="Profile"
-               asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+            <a asp-action="TaskList"
+               asp-route-page="@(Model.PagedViewModel.PageNumber - 1)"
                class="btn btn-default btn">
                 <i class="glyphicon glyphicon-chevron-left"></i>
                 Past
             </a>
         }
 
-        @if (Model.PageViewModel.HasNextPage)
+        @if (Model.PagedViewModel.HasNextPage)
         {
-            <a asp-action="Profile"
-               asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+            <a asp-action="TaskList"
+               asp-route-page="@(Model.PagedViewModel.PageNumber + 1)"
                class="btn btn-default btn">
                 Next
                 <i class="glyphicon glyphicon-chevron-right"></i>

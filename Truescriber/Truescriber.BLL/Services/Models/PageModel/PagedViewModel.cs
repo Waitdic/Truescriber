@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace Truescriber.BLL.PageModel
+namespace Truescriber.BLL.Services.Models.PageModel
 {
-    public class PageViewModel
+    public class PagedViewModel
     {
         public int PageNumber { get; protected set; }
         public int TotalPages { get; protected set; }
 
-        public PageViewModel(int count, int pageNumber, int pageSize)
+        public PagedViewModel(int count, int pageNumber, int pageSize)
         {
             PageNumber = pageNumber;
             TotalPages = (int)Math.Ceiling(count / (double)pageSize);

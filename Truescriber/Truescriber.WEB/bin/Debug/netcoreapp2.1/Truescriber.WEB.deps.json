@@ -872,6 +872,7 @@
       "Truescriber.BLL/1.0.0": {
         "dependencies": {
           "Microsoft.AspNet.Mvc": "5.2.7",
+          "Truescriber.Common": "1.0.0",
           "Truescriber.DAL": "1.0.0"
         },
         "runtime": {
@@ -879,6 +880,14 @@
         },
         "compile": {
           "Truescriber.BLL.dll": {}
+        }
+      },
+      "Truescriber.Common/1.0.0": {
+        "runtime": {
+          "Truescriber.Common.dll": {}
+        },
+        "compile": {
+          "Truescriber.Common.dll": {}
         }
       },
       "Truescriber.DAL/1.0.0": {
@@ -4012,6 +4021,11 @@
       "hashPath": "system.security.principal.windows.4.5.1.nupkg.sha512"
     },
     "Truescriber.BLL/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Truescriber.Common/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

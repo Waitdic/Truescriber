@@ -26,3 +26,5 @@ E:\gitlab\Truescriber\Truescriber.BLL\bin\Debug\netcoreapp2.1\Microsoft.AspNetCo
 E:\gitlab\Truescriber\Truescriber.BLL\bin\Debug\netcoreapp2.1\Microsoft.AspNetCore.Mvc.Core.dll
 E:\gitlab\Truescriber\Truescriber.BLL\bin\Debug\netcoreapp2.1\Microsoft.AspNetCore.Mvc.Abstractions.xml
 E:\gitlab\Truescriber\Truescriber.BLL\bin\Debug\netcoreapp2.1\Microsoft.AspNetCore.Mvc.Core.xml
+E:\gitlab\Truescriber\Truescriber.BLL\bin\Debug\netcoreapp2.1\Truescriber.Common.dll
+E:\gitlab\Truescriber\Truescriber.BLL\bin\Debug\netcoreapp2.1\Truescriber.Common.pdb

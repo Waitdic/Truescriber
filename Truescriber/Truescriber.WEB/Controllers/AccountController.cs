@@ -38,13 +38,6 @@ namespace Truescriber.WEB.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
-            //if (!ModelState.IsValid) return View(model);
-            
-            //var user = new User(model.Email);
-            //var result = await _userManager.CreateAsync(user, model.Password);
-
-            //var userValid = await _userService.Register(user, result, ModelState);
-
             var userValid = await _userService.Register(model, ModelState);
             if (userValid != true) return View(model);
 
@@ -69,8 +62,8 @@ namespace Truescriber.WEB.Controllers
                 true,
                 false);
 
-            var test = await _userService.Login(model, result, ModelState);
-            if (test == false) return View(model);
+            var userLogin = await _userService.Login(model, result, ModelState);
+            if (userLogin == false) return View(model);
 
             return RedirectToAction("TaskList");
         }
@@ -82,13 +75,13 @@ namespace Truescriber.WEB.Controllers
         }
 
         [HttpGet]
-        public IActionResult Upload()
+        public IActionResult CreateTask()
         {
-            return View(new UploadViewModel{});
+            return View(new CreateTaskViewModel{});
         }
 
         [HttpPost]
-        public ActionResult Upload(UploadViewModel uploadModel)
+        public ActionResult CreateTask(CreateTaskViewModel uploadModel)
         {
             var result = _taskService.UploadFile(_userManager.GetUserId(User), uploadModel, ModelState);
             if (result != null) return View(uploadModel);

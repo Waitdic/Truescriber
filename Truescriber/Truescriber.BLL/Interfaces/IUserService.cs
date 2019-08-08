@@ -9,7 +9,6 @@ namespace Truescriber.BLL.Interfaces
 {
     public interface IUserService
     {
-        // Task<bool> Register(User user, IdentityResult result, ModelStateDictionary modelState);
         Task<bool> Register(RegisterViewModel model, ModelStateDictionary modelState);
         Task<bool> Login(LoginViewModel item, SignInResult result, ModelStateDictionary modelState);
         Task Logout(string id);

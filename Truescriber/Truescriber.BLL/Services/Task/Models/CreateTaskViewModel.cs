@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Truescriber.BLL.Services.Task.Models
 {
-    public class UploadViewModel
+    public class CreateTaskViewModel
     {
         [Required]
         [Display(Name = "TaskName")]

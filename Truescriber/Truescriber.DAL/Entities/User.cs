@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
+using Truescriber.DAL.Entities.Tasks;
 
 namespace Truescriber.DAL.Entities
 {

@@ -21,22 +21,6 @@ namespace Truescriber.BLL.Services.User
             _signInManager = signInManager;
         }
 
-        /*public async Task<bool> Register(DAL.Entities.User user, IdentityResult result, ModelStateDictionary modelState)
-        {
-
-            if (!result.Succeeded)
-            {
-                foreach (var error in result.Errors)
-                {
-                    modelState.AddModelError(string.Empty, error.Description);
-                    return false;
-                }
-            }
-
-            await _signInManager.SignInAsync(user, false);
-            return true;
-        }*/
-
         public async Task<bool> Register(RegisterViewModel model, ModelStateDictionary modelState)
         {
             if (!modelState.IsValid) return false;

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Http;
 
 namespace Truescriber.DAL.Interfaces
 {
@@ -13,8 +12,6 @@ namespace Truescriber.DAL.Interfaces
         void Create(T item);
         void Update(T item);
         void Delete(int id);
-
-        void CreateDescription(string name, IFormFile file, string id);
         void SaveChange();
     }
 }

@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Truescriber.DAL.EFContext;
 using Truescriber.DAL.Interfaces;
-using Task = Truescriber.DAL.Entities.Task;
+using Truescriber.DAL.Entities.Tasks;
+using Task = Truescriber.DAL.Entities.Tasks.Task;
 
 namespace Truescriber.DAL.Repositories
 {
@@ -62,25 +63,6 @@ namespace Truescriber.DAL.Repositories
         public void SaveChange()
         {
             db.SaveChanges();
-        }
-
-        public void CreateDescription(string taskName, IFormFile file, string id)
-        {
-            var task = new Task(
-                    DateTime.UtcNow,
-                    taskName,
-                    file.FileName,
-                    file.ContentType,
-                    file.Length,
-                    id);
-
-            using (var binaryReader = new BinaryReader(file.OpenReadStream()))
-            {
-                task.AddFile(binaryReader.ReadBytes((int)file.Length));
-            }
-            task.ChangeStatus(StatusValue.UploadToServer);
-
-            Create(task);
         }
 
         private static void CheckId(int id)

@@ -1,14 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-public enum StatusValue
-{
-    UploadToServer,
-    Processed,
-    Finished
-};
-
-namespace Truescriber.DAL.Entities
+namespace Truescriber.DAL.Entities.Tasks
 {
     public class Task
     {
@@ -69,7 +62,7 @@ namespace Truescriber.DAL.Entities
             File = file;
         }
 
-        public void ChangeStatus(StatusValue status)
+        public void ChangeStatus(TaskStatus status)
         {
             Status = status.ToString();
         }

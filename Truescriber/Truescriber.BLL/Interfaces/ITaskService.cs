@@ -8,9 +8,9 @@ namespace Truescriber.BLL.Interfaces
     {
         PagedTaskList CreateTaskList(int page, string id);
 
-        UploadViewModel UploadFile(
+        CreateTaskViewModel UploadFile(
             string id, 
-            UploadViewModel item, 
+            CreateTaskViewModel item, 
             ModelStateDictionary modelState);
 
         void EditTask(EditTaskViewModel item);

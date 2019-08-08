@@ -33,8 +33,8 @@ E:\gitlab\Truescriber\Truescriber.WEB\bin\Debug\netcoreapp2.1\Truescriber.BLL.dl
 E:\gitlab\Truescriber\Truescriber.WEB\bin\Debug\netcoreapp2.1\Truescriber.BLL.pdb
 E:\gitlab\Truescriber\Truescriber.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Account\Login.g.cshtml.cs
 E:\gitlab\Truescriber\Truescriber.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Account\Register.g.cshtml.cs
-E:\gitlab\Truescriber\Truescriber.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Account\Upload.g.cshtml.cs
 E:\gitlab\Truescriber\Truescriber.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Account\Edit.g.cshtml.cs
 E:\gitlab\Truescriber\Truescriber.WEB\bin\Debug\netcoreapp2.1\Truescriber.Common.dll
 E:\gitlab\Truescriber\Truescriber.WEB\bin\Debug\netcoreapp2.1\Truescriber.Common.pdb
 E:\gitlab\Truescriber\Truescriber.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Account\TaskList.g.cshtml.cs
+E:\gitlab\Truescriber\Truescriber.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Account\CreateTask.g.cshtml.cs

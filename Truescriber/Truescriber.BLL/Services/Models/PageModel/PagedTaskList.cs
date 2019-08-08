@@ -2,7 +2,6 @@
 
 namespace Truescriber.BLL.Services.Models.PageModel
 {
-    // TODO: Rename to PagedTaskList
     public class PagedTaskList
     {
         public IEnumerable<TaskViewModel> TaskViewModels { get; set; }

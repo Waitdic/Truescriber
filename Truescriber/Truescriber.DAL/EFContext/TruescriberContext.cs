@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Truescriber.DAL.Entities;
+using Truescriber.DAL.Entities.Tasks;
 
 namespace Truescriber.DAL.EFContext
 {

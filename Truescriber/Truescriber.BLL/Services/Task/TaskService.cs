@@ -28,19 +28,19 @@ namespace Truescriber.BLL.Services.Task
             const int pageSize = 15;
             var tasks = _taskRepository.Find(t => t.UserId == userId);
 
-            var enumerable = tasks as DAL.Entities.Tasks.Task[] ?? tasks.ToArray();     // Form an array of tasks;
-            var count = enumerable.Count();                                             // Number of all tasks;
-            var taskViewModel = new TaskViewModel[count];                               // Create array of TaskViewModel;
+            var enumerable = tasks as DAL.Entities.Tasks.Task[] ?? tasks.ToArray();     
+            var count = enumerable.Count();                                             
+            var taskViewModel = new TaskViewModel[count];                               
 
             for (var i = 0; i < count; i++)
             {
-                taskViewModel[i] = new TaskViewModel(enumerable[i]);                    //Give each task a converted size;
+                taskViewModel[i] = new TaskViewModel(enumerable[i]);                    
             }
 
-            var items = taskViewModel.Skip((page - 1) * pageSize).Take(pageSize).ToList(); // Skip the required number of items;
-            var pageViewModel = new PagedViewModel(count, page, pageSize);        //Create new Page;
+            var items = taskViewModel.Skip((page - 1) * pageSize).Take(pageSize).ToList(); 
+            var pageViewModel = new PagedViewModel(count, page, pageSize);        
 
-            var viewModel = new PagedTaskList(items, pageViewModel);                        // General ViewModel;
+            var viewModel = new PagedTaskList(items, pageViewModel);                        
             return  viewModel;
         }
 

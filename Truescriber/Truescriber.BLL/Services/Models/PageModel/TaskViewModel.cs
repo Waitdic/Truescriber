@@ -6,7 +6,7 @@ namespace Truescriber.BLL.Services.Models.PageModel
     {
         public DAL.Entities.Tasks.Task Task { get; set; }
         
-        public string FileSize { get; set; } //Size + suffix
+        public string FileSize { get; set; } 
 
         public TaskViewModel(DAL.Entities.Tasks.Task task)
         {

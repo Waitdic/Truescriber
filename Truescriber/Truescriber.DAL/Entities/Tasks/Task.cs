@@ -32,7 +32,8 @@ namespace Truescriber.DAL.Entities.Tasks
         public DateTime StartTime { get; protected set; }
         public DateTime FinishTime { get; protected set; }
 
-        public string Status { get; protected set; }
+        // TODO: Use enum
+        public TaskStatus Status { get; protected set; }
         public string TaskName { get; protected set; }
         public string FileName { get; protected set; }
         public string Format { get; protected set; }
@@ -41,13 +42,6 @@ namespace Truescriber.DAL.Entities.Tasks
 
         public string UserId { get; protected set; }
         [ForeignKey("UserId")] public virtual User User { get; set; }
-
-
-        public void ChangeCreateTime()
-        {
-            var createTime = DateTime.UtcNow;
-            CreateTime = createTime;
-        }
 
         public void ChangeTaskName(string taskName)
         {
@@ -64,7 +58,8 @@ namespace Truescriber.DAL.Entities.Tasks
 
         public void ChangeStatus(TaskStatus status)
         {
-            Status = status.ToString();
+            // TODO: Transitions validation
+            Status = status;
         }
     }
 }

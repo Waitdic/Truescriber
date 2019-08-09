@@ -13,6 +13,8 @@
     <Compile Remove="Migrations\20190731042920_Initial.Designer.cs" />
     <Compile Remove="Migrations\20190731044020_RenameToFmt.cs" />
     <Compile Remove="Migrations\20190731044020_RenameToFmt.Designer.cs" />
+    <Compile Remove="Migrations\20190809031610_StatusFromStringToEnum.cs" />
+    <Compile Remove="Migrations\20190809031610_StatusFromStringToEnum.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

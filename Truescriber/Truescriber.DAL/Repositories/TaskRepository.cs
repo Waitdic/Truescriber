@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Truescriber.DAL.EFContext;
 using Truescriber.DAL.Interfaces;
-using Truescriber.DAL.Entities.Tasks;
 using Task = Truescriber.DAL.Entities.Tasks.Task;
 
 namespace Truescriber.DAL.Repositories
@@ -60,9 +57,9 @@ namespace Truescriber.DAL.Repositories
             SaveChange();
         }
 
-        public void SaveChange()
+        public async void SaveChange()
         {
-            db.SaveChanges();
+            await db.SaveChangesAsync();
         }
 
         private static void CheckId(int id)

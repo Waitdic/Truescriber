@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace Truescriber.DAL.Interfaces
 {
+    // TODO: Make async
     public interface IRepository<T> where T : class
     {
         IEnumerable<T> GetAll();

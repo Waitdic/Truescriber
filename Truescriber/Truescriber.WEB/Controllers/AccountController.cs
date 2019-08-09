@@ -68,9 +68,9 @@ namespace Truescriber.WEB.Controllers
             return RedirectToAction("TaskList");
         }
 
-        public IActionResult TaskList(int page = 1)
+        public async Task<IActionResult> TaskList(int page = 1)
         {
-            var viewModel = _taskService.CreateTaskList(page, _userManager.GetUserId(User));
+            var viewModel = await _taskService.CreateTaskList(page, _userManager.GetUserId(User));
             return View(viewModel); 
         }
 
@@ -81,17 +81,17 @@ namespace Truescriber.WEB.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateTask(CreateTaskViewModel uploadModel)
+        public async Task<ActionResult> CreateTask(CreateTaskViewModel uploadModel)
         {
-            var result = _taskService.UploadFile(_userManager.GetUserId(User), uploadModel, ModelState);
+            var result = await _taskService.UploadFile(_userManager.GetUserId(User), uploadModel, ModelState);
             if (result != null) return View(uploadModel);
 
            return RedirectToAction("TaskList", "Account");
         }
 
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            _taskService.DeleteTask(id);
+            await _taskService.DeleteTask(id);
             return RedirectToAction("TaskList");
         }
 
@@ -106,9 +106,9 @@ namespace Truescriber.WEB.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(EditTaskViewModel model)
+        public async Task<ActionResult> Edit(EditTaskViewModel model)
         {
-            _taskService.EditTask(model);
+            await _taskService.EditTask(model);
             return RedirectToAction("TaskList");
         }
 

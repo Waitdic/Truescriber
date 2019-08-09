@@ -32,7 +32,6 @@ namespace Truescriber.DAL.Entities.Tasks
         public DateTime StartTime { get; protected set; }
         public DateTime FinishTime { get; protected set; }
 
-        // TODO: Use enum
         public TaskStatus Status { get; protected set; }
         public string TaskName { get; protected set; }
         public string FileName { get; protected set; }
@@ -58,7 +57,10 @@ namespace Truescriber.DAL.Entities.Tasks
 
         public void ChangeStatus(TaskStatus status)
         {
-            // TODO: Transitions validation
+            var dif = Status - status;
+            if (dif > 1 || dif < 0)
+                throw new ArgumentException("The process cannot be skipped and cannot be reversed");
+
             Status = status;
         }
     }

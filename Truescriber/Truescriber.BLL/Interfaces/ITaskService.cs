@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Truescriber.BLL.Services.Models.PageModel;
 using Truescriber.BLL.Services.Task.Models;
 
@@ -6,14 +7,14 @@ namespace Truescriber.BLL.Interfaces
 {
     public interface ITaskService
     {
-        PagedTaskList CreateTaskList(int page, string id);
+        Task<PagedTaskList> CreateTaskList(int page, string id);
 
-        CreateTaskViewModel UploadFile(
+        Task<CreateTaskViewModel> UploadFile(
             string id, 
             CreateTaskViewModel item, 
             ModelStateDictionary modelState);
 
-        void EditTask(EditTaskViewModel item);
-        void DeleteTask(int id);
+        Task EditTask(EditTaskViewModel item);
+        Task DeleteTask(int id);
     }
 }

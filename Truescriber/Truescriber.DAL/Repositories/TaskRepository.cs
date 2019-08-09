@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Truescriber.DAL.EFContext;
 using Truescriber.DAL.Interfaces;
+using EntityState = Microsoft.EntityFrameworkCore.EntityState;
 using Task = Truescriber.DAL.Entities.Tasks.Task;
 
 namespace Truescriber.DAL.Repositories
@@ -16,27 +19,32 @@ namespace Truescriber.DAL.Repositories
         {
             db = context;
         }
-        public IEnumerable<Task> GetAll()
+        public async Task<IEnumerable<Task>> GetAllAsync()
         {
-            return db.Tasks;
+            return await db.Tasks.ToListAsync();
         }
 
-        public Task Get(int id)
+        public async Task<Task> Get(int id)
         {
             CheckId(id);
-            return db.Tasks.Find(id);
+            return await db.Tasks.FindAsync(id);
         }
 
-        public async void Create(Task task)
+        public async System.Threading.Tasks.Task Create(Task task)
         {
             TaskValidation(task);
             await db.Tasks.AddAsync(task);
-            SaveChange();
+            await SaveChangeAsync();
         }
 
-        public IEnumerable<Task> Find(Func<Task, bool> predicate)
+        public async Task<Task> FindAsync(Expression<Func<Task, bool>> predicate)
         {
-            return db.Tasks.Where(predicate).ToList(); ;
+            return await db.Tasks.AsQueryable().Where(predicate).FirstAsync();
+        }
+
+        public async Task<IEnumerable<Task>> FindAllAsync(Expression<Func<Task,bool>> predicate)
+        {
+            return await db.Tasks.AsQueryable().Where(predicate).ToListAsync();
         }
 
         public void Update(Task task)
@@ -45,19 +53,19 @@ namespace Truescriber.DAL.Repositories
             db.Entry(task).State = EntityState.Modified;
         }
 
-        public void Delete(int id)
+        public async System.Threading.Tasks.Task DeleteAsync(int id)
         {
             CheckId(id);
-            var task = db.Tasks.Find(id);
+            var task = await db.Tasks.FindAsync(id);
 
             if (task == null)
                 throw new ArgumentException("Task not found");
 
             db.Tasks.Remove(task);
-            SaveChange();
+            await SaveChangeAsync();
         }
 
-        public async void SaveChange()
+        public async System.Threading.Tasks.Task SaveChangeAsync()
         {
             await db.SaveChangesAsync();
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Truescriber.BLL.Interfaces;
@@ -8,7 +9,7 @@ using Truescriber.BLL.Services.Models.PageModel;
 using Truescriber.BLL.Services.Task.Models;
 using Truescriber.Common.Helpers;
 using Truescriber.DAL.Interfaces;
-using Truescriber.DAL.Entities.Tasks;
+using TaskStatus = Truescriber.DAL.Entities.Tasks.TaskStatus;
 
 namespace Truescriber.BLL.Services.Task
 {
@@ -23,11 +24,11 @@ namespace Truescriber.BLL.Services.Task
             FormatHelper = new FormatHelper();
         }
 
-        public PagedTaskList CreateTaskList(int page, string userId)
+        public async Task<PagedTaskList> CreateTaskList(int page, string userId)
         {
             const int pageSize = 15;
-            var tasks = _taskRepository.Find(t => t.UserId == userId);
-
+            var tasks = await _taskRepository.FindAllAsync(t => t.UserId == userId);
+            
             var enumerable = tasks as DAL.Entities.Tasks.Task[] ?? tasks.ToArray();     
             var count = enumerable.Count();                                             
             var taskViewModel = new TaskViewModel[count];                               
@@ -41,10 +42,10 @@ namespace Truescriber.BLL.Services.Task
             var pageViewModel = new PagedViewModel(count, page, pageSize);        
 
             var viewModel = new PagedTaskList(items, pageViewModel);                        
-            return  viewModel;
+            return viewModel;
         }
 
-        public CreateTaskViewModel UploadFile(
+        public async Task<CreateTaskViewModel> UploadFile(
             string id, 
             CreateTaskViewModel uploadModel, 
             ModelStateDictionary modelState
@@ -61,24 +62,24 @@ namespace Truescriber.BLL.Services.Task
                 return uploadModel;
             }
 
-            CreateDescription(uploadModel.TaskName, uploadModel.File, id);
+            await CreateDescription(uploadModel.TaskName, uploadModel.File, id);
             return null;
         }
 
-        public void DeleteTask(int id)
+        public async System.Threading.Tasks.Task DeleteTask(int id)
         {
-            _taskRepository.Delete(id);
+            await _taskRepository.DeleteAsync(id);
         }
 
-        public void EditTask(EditTaskViewModel editModel)
+        public async System.Threading.Tasks.Task EditTask(EditTaskViewModel editModel)
         {
             if(editModel == null)
                 throw new ArgumentException("Model cannot be null");
             
-            var task = _taskRepository.Get(editModel.TaskId);
+            var task = await _taskRepository.Get(editModel.TaskId);
             task.ChangeTaskName(editModel.TaskName);
             _taskRepository.Update(task);
-            _taskRepository.SaveChange();
+            await _taskRepository.SaveChangeAsync();
         }
 
         private static bool GetFormatValid(string format)
@@ -92,7 +93,7 @@ namespace Truescriber.BLL.Services.Task
             return "Supported formats:" + FormatHelper.SupportedFormatsMessage();
         }
 
-        private void CreateDescription(string taskName, IFormFile file, string id)
+        private async System.Threading.Tasks.Task CreateDescription(string taskName, IFormFile file, string id)
         {
             var task = new DAL.Entities.Tasks.Task(
                 DateTime.UtcNow,
@@ -108,7 +109,7 @@ namespace Truescriber.BLL.Services.Task
             }
             task.ChangeStatus(TaskStatus.UploadToServer);
 
-            _taskRepository.Create(task);
+            await _taskRepository.Create(task);
         }
     }
 }

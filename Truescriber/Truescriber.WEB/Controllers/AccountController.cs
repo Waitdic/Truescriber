@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Truescriber.DAL.Entities;
 using Microsoft.AspNetCore.Authorization;
-using Truescriber.BLL.IdentityModels;
+using Truescriber.BLL.Interfaces;
+using Truescriber.BLL.Services.Task.Models;
+using Truescriber.BLL.Services.User.IdentityModels;
 
 namespace Truescriber.WEB.Controllers
 {
@@ -11,15 +13,21 @@ namespace Truescriber.WEB.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly ITaskService _taskService;
+        private readonly IUserService _userService;
 
         public AccountController(
             UserManager<User> userManager,
-            SignInManager<User> signInManager
-        ){
+            SignInManager<User> signInManager,
+            ITaskService taskService,
+            IUserService userService
+        )
+        {
             _userManager = userManager;
             _signInManager = signInManager;
+            _taskService = taskService;
+            _userService = userService;
         }
-
 
         [HttpGet]
         public IActionResult Register()
@@ -30,70 +38,85 @@ namespace Truescriber.WEB.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
-            if (!ModelState.IsValid) return View(model);
-            var user = new User {Email = model.Email, UserName = model.Email, Online = false};
-            var result = await _userManager.CreateAsync(user, model.Password);
+            var userValid = await _userService.Register(model, ModelState);
+            if (userValid != true) return View(model);
 
-            if (!result.Succeeded)
-            {
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                    return View(model);
-                }
-            }
-
-            await _signInManager.SignInAsync(user, false);
             return RedirectToAction("Login", "Account");
         }
-
-
 
         [Authorize]
         [AllowAnonymous]
         public IActionResult Login()
         {
-            return View(new LoginModel {});
+            return View(new LoginViewModel { });
         }
 
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginModel model)
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
-            if (!ModelState.IsValid) return View(model);
-            var result = await _signInManager.PasswordSignInAsync(model.Login, model.Password, true, false);
+            var result = await _signInManager.PasswordSignInAsync(
+                model.Login,
+                model.Password,
+                true,
+                false);
 
-            if (!result.Succeeded)
-            {
-                    ModelState.AddModelError("", "Неправильный логин и (или) пароль");
-                //ViewBag.Message = "Неправильный логин и (или) пароль";
-                return View(model);
-            }
+            var userLogin = await _userService.Login(model, result, ModelState);
+            if (userLogin == false) return View(model);
 
-
-            var user = await _userManager.FindByNameAsync(model.Login);
-            user.Online = true;
-            await _userManager.UpdateAsync(user);
-            return RedirectToAction("Profile", "Account");
-            }
-
-
-        public IActionResult Profile()
-        {
-            return View();
+            return RedirectToAction("TaskList");
         }
 
+        public async Task<IActionResult> TaskList(int page = 1)
+        {
+            var viewModel = await _taskService.CreateTaskList(page, _userManager.GetUserId(User));
+            return View(viewModel); 
+        }
+
+        [HttpGet]
+        public IActionResult CreateTask()
+        {
+            return View(new CreateTaskViewModel{});
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> CreateTask(CreateTaskViewModel uploadModel)
+        {
+            var result = await _taskService.UploadFile(_userManager.GetUserId(User), uploadModel, ModelState);
+            if (result != null) return View(uploadModel);
+
+           return RedirectToAction("TaskList", "Account");
+        }
+
+        public async Task<ActionResult> Delete(int id)
+        {
+            await _taskService.DeleteTask(id);
+            return RedirectToAction("TaskList");
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id, string taskName)
+        {
+            return View(new EditTaskViewModel
+            {
+                TaskName = taskName,
+                TaskId = id          
+            });
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Edit(EditTaskViewModel model)
+        {
+            await _taskService.EditTask(model);
+            return RedirectToAction("TaskList");
+        }
 
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            user.Online = false;
-            await _userManager.UpdateAsync(user);
-            await _signInManager.SignOutAsync();
+            await _userService.Logout(_userManager.GetUserId(User));
             return RedirectToAction("Login", "Account");
         }
-
     }
 }

@@ -1,0 +1,26 @@
+﻿@model Truescriber.BLL.Services.Task.Models.EditTaskViewModel;
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<form method="post" asp-controller="Account" asp-action="Edit">
+    <table  class="table table-bordered">
+        <tr>
+            <td>Task name</td>
+            <td><input asp-for="TaskName" value="@Model.TaskName"/></td>
+        </tr>
+    </table>
+    <input type="hidden" asp-for="TaskId" value="@Model.TaskId"/>
+    <div align="center">
+        <button type="submit"
+                class="btn btn-sm btn-primary" value="@Model.TaskId">
+            Update
+        </button>
+        <button class="btn btn-sm btn-danger">
+            Start processing 
+        </button>
+    </div>
+</form>

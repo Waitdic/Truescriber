@@ -1,5 +1,3 @@
-using System;
-
 namespace Truescriber.WEB.Models
 {
     public class ErrorViewModel

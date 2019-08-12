@@ -29,6 +29,7 @@ namespace Truescriber.WEB
 
             services.AddRegistry(connection);
             services.AddMvcService();
+            services.AddInterfaces();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

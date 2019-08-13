@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Truescriber.DAL.Entities;
@@ -110,6 +111,15 @@ namespace Truescriber.WEB.Controllers
         {
             await _taskService.EditTask(model);
             return RedirectToAction("TaskList");
+        }
+
+
+        //[HttpPost]
+        public IActionResult StartProcessing(Result result)
+        {
+            result.TextResult = _taskService.StartProcessing("E:/загрузки/Record_flac_48Hz.flac");
+            return View(result);
+            //return View();
         }
 
         [ValidateAntiForgeryToken]

@@ -19,8 +19,12 @@
                 class="btn btn-sm btn-primary" value="@Model.TaskId">
             Update
         </button>
-        <button class="btn btn-sm btn-danger">
+        <a class="btn btn-sm btn-primary"
+           asp-action="StartProcessing">
             Start processing 
-        </button>
+        </a>
+        <!--<button class="btn btn-sm btn-danger">
+            Start processing 
+        </button>-->
     </div>
 </form>

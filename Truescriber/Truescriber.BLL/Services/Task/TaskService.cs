@@ -2,6 +2,8 @@
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Google.Apis.Auth.OAuth2;
+using Google.Cloud.Speech.V1;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Truescriber.BLL.Interfaces;
@@ -82,6 +84,30 @@ namespace Truescriber.BLL.Services.Task
             await _taskRepository.SaveChangeAsync();
         }
 
+        public string StartProcessing(string filePath)
+        {
+            var test = "";
+            //var credential = GoogleCredential.GetApplicationDefault();
+            var speech = SpeechClient.Create();
+            /*var response = speech.Recognize(new RecognitionConfig()
+            {
+                Encoding = RecognitionConfig.Types.AudioEncoding.Linear16,
+                SampleRateHertz = 16000,
+                LanguageCode = "en",
+            }, RecognitionAudio.FromFile(filePath));*/
+
+            var response = speech.Recognize(new RecognitionConfig(), RecognitionAudio.FromFile(filePath));
+            foreach (var result in response.Results)
+            {
+                foreach (var alternative in result.Alternatives)
+                {
+                    //Console.WriteLine(alternative.Transcript);
+                    test += alternative.Transcript;
+                }
+            }
+            return test;
+        }
+
         private static bool GetFormatValid(string format)
         {
             var result = FormatHelper.GetFormats().Find((x) => x == format);
@@ -111,5 +137,6 @@ namespace Truescriber.BLL.Services.Task
 
             await _taskRepository.Create(task);
         }
+
     }
 }

@@ -38,3 +38,4 @@ E:\gitlab\Truescriber\Truescriber.WEB\bin\Debug\netcoreapp2.1\Truescriber.Common
 E:\gitlab\Truescriber\Truescriber.WEB\bin\Debug\netcoreapp2.1\Truescriber.Common.pdb
 E:\gitlab\Truescriber\Truescriber.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Account\TaskList.g.cshtml.cs
 E:\gitlab\Truescriber\Truescriber.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Account\CreateTask.g.cshtml.cs
+E:\gitlab\Truescriber\Truescriber.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Account\StartProcessing.g.cshtml.cs

@@ -38,6 +38,7 @@ namespace Truescriber.DAL.Entities.Tasks
         public string Format { get; protected set; }
         public long Size { get; protected set; }
         public byte[] File { get; protected set; }
+        public string FilePath { get; protected set; }
 
         public string UserId { get; protected set; }
         [ForeignKey("UserId")] public virtual User User { get; set; }

@@ -113,13 +113,10 @@ namespace Truescriber.WEB.Controllers
             return RedirectToAction("TaskList");
         }
 
-
-        //[HttpPost]
-        public IActionResult StartProcessing(Result result)
+        public IActionResult StartProcessing(int id, ResultViewModel result)
         {
-            result.TextResult = _taskService.StartProcessing("E:/загрузки/Record_flac_48Hz.flac");
+            result.TextResult = _taskService.StartProcessing(id);
             return View(result);
-            //return View();
         }
 
         [ValidateAntiForgeryToken]

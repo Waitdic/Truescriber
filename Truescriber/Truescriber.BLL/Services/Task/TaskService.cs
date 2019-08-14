@@ -2,8 +2,6 @@
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Google.Apis.Auth.OAuth2;
-using Google.Cloud.Speech.V1;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Truescriber.BLL.Interfaces;
@@ -12,6 +10,7 @@ using Truescriber.BLL.Services.Task.Models;
 using Truescriber.Common.Helpers;
 using Truescriber.DAL.Interfaces;
 using TaskStatus = Truescriber.DAL.Entities.Tasks.TaskStatus;
+using Truescriber.BLL.Clients;
 
 namespace Truescriber.BLL.Services.Task
 {
@@ -19,11 +18,13 @@ namespace Truescriber.BLL.Services.Task
     {
         private readonly IRepository<DAL.Entities.Tasks.Task> _taskRepository;
         public static FormatHelper FormatHelper;
+        public static SpeechToTextClient SpeechToTextClient;
 
         public TaskService(IRepository<DAL.Entities.Tasks.Task> taskRep)
         {
             _taskRepository = taskRep;
             FormatHelper = new FormatHelper();
+            SpeechToTextClient = new SpeechToTextClient();
         }
 
         public async Task<PagedTaskList> CreateTaskList(int page, string userId)
@@ -84,28 +85,11 @@ namespace Truescriber.BLL.Services.Task
             await _taskRepository.SaveChangeAsync();
         }
 
-        public string StartProcessing(string filePath)
+        public string StartProcessing(int id)
         {
-            var test = "";
-            //var credential = GoogleCredential.GetApplicationDefault();
-            var speech = SpeechClient.Create();
-            /*var response = speech.Recognize(new RecognitionConfig()
-            {
-                Encoding = RecognitionConfig.Types.AudioEncoding.Linear16,
-                SampleRateHertz = 16000,
-                LanguageCode = "en",
-            }, RecognitionAudio.FromFile(filePath));*/
-
-            var response = speech.Recognize(new RecognitionConfig(), RecognitionAudio.FromFile(filePath));
-            foreach (var result in response.Results)
-            {
-                foreach (var alternative in result.Alternatives)
-                {
-                    //Console.WriteLine(alternative.Transcript);
-                    test += alternative.Transcript;
-                }
-            }
-            return test;
+            var task =_taskRepository.Get(id);
+            var result = SpeechToTextClient.SyncRecognizeShort(task.Result.File);
+            return result;
         }
 
         private static bool GetFormatValid(string format)
@@ -127,7 +111,8 @@ namespace Truescriber.BLL.Services.Task
                 file.FileName,
                 file.ContentType,
                 file.Length,
-                id);
+                id,
+                file.ContentDisposition);
 
             using (var binaryReader = new BinaryReader(file.OpenReadStream()))
             {

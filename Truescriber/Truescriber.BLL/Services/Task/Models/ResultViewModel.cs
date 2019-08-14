@@ -1,6 +1,6 @@
 ﻿namespace Truescriber.BLL.Services.Task.Models
 {
-    public class Result
+    public class ResultViewModel
     {
         public string TextResult { get; set; }
     }

@@ -15,7 +15,8 @@ namespace Truescriber.DAL.Entities.Tasks
             string fileName,
             string format,
             long size,
-            string userId
+            string userId,
+            string filePath
         )
         {
             CreateTime = createTime;
@@ -24,6 +25,7 @@ namespace Truescriber.DAL.Entities.Tasks
             Format = format;
             Size = size;
             UserId = userId;
+            FilePath = filePath;
         }
 
         public int Id { get; protected set; }

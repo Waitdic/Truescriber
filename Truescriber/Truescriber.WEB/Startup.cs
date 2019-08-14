@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Truescriber.BLL.Clients;
+using Truescriber.BLL.Interfaces;
 using Truescriber.WEB.Infrastructure;
 
 namespace Truescriber.WEB
@@ -30,6 +32,7 @@ namespace Truescriber.WEB
             services.AddRegistry(connection);
             services.AddMvcService();
             services.AddInterfaces();
+            //services.AddTransient<IClient, SpeechToTextClient>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

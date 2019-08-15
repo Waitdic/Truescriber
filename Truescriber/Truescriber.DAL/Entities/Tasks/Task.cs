@@ -15,8 +15,7 @@ namespace Truescriber.DAL.Entities.Tasks
             string fileName,
             string format,
             long size,
-            string userId,
-            string filePath
+            string userId
         )
         {
             CreateTime = createTime;
@@ -25,7 +24,6 @@ namespace Truescriber.DAL.Entities.Tasks
             Format = format;
             Size = size;
             UserId = userId;
-            FilePath = filePath;
         }
 
         public int Id { get; protected set; }
@@ -40,7 +38,6 @@ namespace Truescriber.DAL.Entities.Tasks
         public string Format { get; protected set; }
         public long Size { get; protected set; }
         public byte[] File { get; protected set; }
-        public string FilePath { get; protected set; }
 
         public string UserId { get; protected set; }
         [ForeignKey("UserId")] public virtual User User { get; set; }

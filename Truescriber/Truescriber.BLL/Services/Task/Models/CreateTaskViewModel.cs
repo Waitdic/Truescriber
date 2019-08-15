@@ -11,6 +11,8 @@ namespace Truescriber.BLL.Services.Task.Models
 
         [Required]
         [Display(Name = "File")]
-        public  IFormFile File { get; set; }
+        public IFormFile File { get; set; }
+
+        public bool DurationMoreMinute { get; set; }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Net;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Truescriber.DAL.Entities;
@@ -115,6 +114,7 @@ namespace Truescriber.WEB.Controllers
 
         public IActionResult StartProcessing(int id, ResultViewModel result)
         {
+
             result.TextResult = _taskService.StartProcessing(id);
             return View(result);
         }

@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Data.Entity.ModelConfiguration.Configuration;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
-using Google.Cloud.Speech.V1;
-using Google.Protobuf.WellKnownTypes;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.WindowsAPICodePack.Shell;
-using Microsoft.WindowsAPICodePack.Shell.PropertySystem;
 using Truescriber.BLL.Interfaces;
 using Truescriber.BLL.Services.Models.PageModel;
 using Truescriber.BLL.Services.Task.Models;
@@ -71,7 +65,11 @@ namespace Truescriber.BLL.Services.Task
                 return uploadModel;
             }
 
-            await CreateDescription(uploadModel.TaskName, uploadModel.File, id);
+            await CreateDescription(
+                uploadModel.TaskName, 
+                uploadModel.File, id, 
+                uploadModel.DurationMoreMinute
+                );
             return null;
         }
 
@@ -91,10 +89,26 @@ namespace Truescriber.BLL.Services.Task
             await _taskRepository.SaveChangeAsync();
         }
 
-        public string StartProcessing(int id)
+        public async Task<string> StartProcessing(int id)
         {
-            var task =_taskRepository.Get(id);
-            var result = SpeechToTextClient.SyncRecognize(task.Result.File);
+            var result = "";
+            var task = await _taskRepository.Get(id);
+
+            if (!task.DurationMoreMinute)
+            {
+                task.SetStartTime();
+                result = await SpeechToTextClient.SyncRecognize(task.File);
+                task.SetFinishTime();
+            }
+            else
+            {
+                task.SetStartTime();
+                result = await SpeechToTextClient.AsyncRecognize(task.File);
+                task.SetFinishTime();
+            }
+
+            _taskRepository.Update(task);
+            await _taskRepository.SaveChangeAsync();
             return result;
         }
 
@@ -109,7 +123,11 @@ namespace Truescriber.BLL.Services.Task
             return "Supported formats:" + FormatHelper.SupportedFormatsMessage();
         }
 
-        private async System.Threading.Tasks.Task CreateDescription(string taskName, IFormFile file, string id)
+        private async System.Threading.Tasks.Task CreateDescription(
+            string taskName, 
+            IFormFile file, 
+            string id, 
+            bool durationMoreMinute)
         {
             var task = new DAL.Entities.Tasks.Task(
                 DateTime.UtcNow,
@@ -117,7 +135,9 @@ namespace Truescriber.BLL.Services.Task
                 file.FileName,
                 file.ContentType,
                 file.Length,
-                id);
+                id,
+                durationMoreMinute
+                );
 
             using (var binaryReader = new BinaryReader(file.OpenReadStream()))
             {
@@ -127,16 +147,5 @@ namespace Truescriber.BLL.Services.Task
 
             await _taskRepository.Create(task);
         }
-
-        private static TimeSpan GetDuration(string filePath)
-        {
-            using (var shell = ShellObject.FromParsingName(filePath))
-            {
-                IShellProperty prop = shell.Properties.System.Media.Duration;
-                var t = (ulong)prop.ValueAsObject;
-                return TimeSpan.FromTicks((long) t);
-            }
-        }
-
     }
 }

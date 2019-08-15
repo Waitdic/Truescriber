@@ -1,8 +1,10 @@
-﻿namespace Truescriber.BLL.Interfaces
+﻿using System.Threading.Tasks;
+
+namespace Truescriber.BLL.Interfaces
 {
     public interface ISpeechClient
     {
-        string SyncRecognize(byte[] file);
-        string AsyncRecognize(byte[] file);
+        Task<string> SyncRecognize(byte[] file);
+        Task<string> AsyncRecognize(byte[] file);
     }
 }

@@ -15,7 +15,8 @@ namespace Truescriber.DAL.Entities.Tasks
             string fileName,
             string format,
             long size,
-            string userId
+            string userId,
+            bool durationMoreMinute
         )
         {
             CreateTime = createTime;
@@ -24,6 +25,7 @@ namespace Truescriber.DAL.Entities.Tasks
             Format = format;
             Size = size;
             UserId = userId;
+            DurationMoreMinute = durationMoreMinute;
         }
 
         public int Id { get; protected set; }
@@ -38,6 +40,7 @@ namespace Truescriber.DAL.Entities.Tasks
         public string Format { get; protected set; }
         public long Size { get; protected set; }
         public byte[] File { get; protected set; }
+        public bool DurationMoreMinute { get; protected set; }
 
         public string UserId { get; protected set; }
         [ForeignKey("UserId")] public virtual User User { get; set; }
@@ -62,6 +65,16 @@ namespace Truescriber.DAL.Entities.Tasks
                 throw new ArgumentException("The process cannot be skipped and cannot be reversed");
 
             Status = status;
+        }
+
+        public void SetStartTime()
+        {
+            StartTime = DateTime.UtcNow;
+        }
+
+        public void SetFinishTime()
+        {
+            FinishTime = DateTime.UtcNow;
         }
     }
 }

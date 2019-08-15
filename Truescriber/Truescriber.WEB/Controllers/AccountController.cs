@@ -112,10 +112,10 @@ namespace Truescriber.WEB.Controllers
             return RedirectToAction("TaskList");
         }
 
-        public IActionResult StartProcessing(int id, ResultViewModel result)
+        public async Task<IActionResult> StartProcessing(int id, ResultViewModel result)
         {
 
-            result.TextResult = _taskService.StartProcessing(id);
+            result.TextResult = await _taskService.StartProcessing(id);
             return View(result);
         }
 

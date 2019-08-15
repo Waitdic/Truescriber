@@ -1,4 +1,5 @@
-﻿using Google.Apis.Auth.OAuth2;
+﻿using System.Threading.Tasks;
+using Google.Apis.Auth.OAuth2;
 using Google.Cloud.Speech.V1;
 using Grpc.Auth;
 using Truescriber.BLL.Interfaces;
@@ -17,10 +18,10 @@ namespace Truescriber.BLL.Clients
             return speech;
         }
 
-        public string SyncRecognize(byte[] file)
+        public async Task<string> SyncRecognize(byte[] file)
         {
             var test = "";
-            var response = SpeechProperty().Recognize(new RecognitionConfig()
+            var response = await SpeechProperty().RecognizeAsync(new RecognitionConfig()
             {
                 Encoding = RecognitionConfig.Types.AudioEncoding.Flac,
                 SampleRateHertz = 48000,
@@ -43,10 +44,10 @@ namespace Truescriber.BLL.Clients
             return test;
         }
 
-        public string AsyncRecognize(byte[] file)
+        public async Task<string> AsyncRecognize(byte[] file)
         {
             var test = "";
-            var longOperation = SpeechProperty().LongRunningRecognize(new RecognitionConfig()
+            var longOperation = await SpeechProperty().LongRunningRecognizeAsync(new RecognitionConfig()
             {
                 Encoding = RecognitionConfig.Types.AudioEncoding.Flac,
                 SampleRateHertz = 48000,

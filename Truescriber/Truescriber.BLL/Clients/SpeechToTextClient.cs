@@ -65,7 +65,7 @@ namespace Truescriber.BLL.Clients
                     test += alternative.Transcript;
                     foreach (var item in alternative.Words)
                     {
-                        test += "   :Word - " + item.Word + "   :StartTime - " + item.StartTime + "   :FinishTime - " + item.EndTime + "\n";
+                        test += "   :Word - " + item.Word + "   :StartTime - " + item.StartTime + "   :FinishTime - " + item.EndTime ;
                     }
                 }
             }

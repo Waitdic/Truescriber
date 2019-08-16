@@ -46,6 +46,7 @@ namespace Truescriber.WEB.Infrastructure
         public static void AddInterfaces(this IServiceCollection services)
         {
             services.AddTransient<IRepository<Task>, TaskRepository>();
+            services.AddTransient<IRepository<Word>, WordRepository>();
             services.AddTransient<ITaskService, TaskService>();
             services.AddTransient<IUserService, UserService>();
         }

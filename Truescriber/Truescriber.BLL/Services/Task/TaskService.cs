@@ -12,18 +12,24 @@ using Truescriber.DAL.Interfaces;
 using TaskStatus = Truescriber.DAL.Entities.Tasks.TaskStatus;
 using Truescriber.BLL.Clients;
 using Truescriber.BLL.Clients.SpeechToTextModels;
+using Truescriber.BLL.Services.Models.ShowResultModel;
+using Truescriber.DAL.Entities;
 
 namespace Truescriber.BLL.Services.Task
 {
     public class TaskService : ITaskService
     {
         private readonly IRepository<DAL.Entities.Tasks.Task> _taskRepository;
+        private readonly IRepository<Word> _wordRepository;
         public static FormatHelper FormatHelper;
         public static SpeechToTextClient SpeechToTextClient;
 
-        public TaskService(IRepository<DAL.Entities.Tasks.Task> taskRep)
-        {
+        public TaskService(
+            IRepository<DAL.Entities.Tasks.Task> taskRep,
+            IRepository<Word> wordRepository
+        ){
             _taskRepository = taskRep;
+            _wordRepository = wordRepository;
             FormatHelper = new FormatHelper();
             SpeechToTextClient = new SpeechToTextClient();
         }
@@ -98,28 +104,56 @@ namespace Truescriber.BLL.Services.Task
             if (!task.DurationMoreMinute)
             {
                 task.SetStartTime();
+                task.ChangeStatus(TaskStatus.Processed);
+                _taskRepository.Update(task);
+                await _taskRepository.SaveChangeAsync();
+
                 result = await SpeechToTextClient.SyncRecognize(task.File);
                 task.SetFinishTime();
             }
             else
             {
                 task.SetStartTime();
+                task.ChangeStatus(TaskStatus.Processed);
+                _taskRepository.Update(task);
+                await _taskRepository.SaveChangeAsync();
+
                 result = await SpeechToTextClient.AsyncRecognize(task.File);
                 task.SetFinishTime();
             }
 
-            task.AddRecognizeResult(result.Text, result.WordInfo);
+            var i = 0;
+            foreach (var item in result.WordInfo)
+            {
+                var word = new Word(
+                    item.Word.ToString(),
+                    item.StartTime,
+                    item.EndTime,
+                    i,
+                    task.Id);
+                i++;
+                await _wordRepository.Create(word);
+                await _wordRepository.SaveChangeAsync();
+            }
+
+            task.ChangeStatus(TaskStatus.Finished);
             _taskRepository.Update(task);
             await _taskRepository.SaveChangeAsync();
         }
 
-        public async Task<SpeechToTextViewModel> ShowResult(int id)
+        public async Task<ShowResultViewModel[]> ShowResult(int id)
         {
-            SpeechToTextViewModel model = null;
-            var task = await _taskRepository.Get(id);
-            model.Text = task.Text;
-            model.WordInfo = task.WordsTimeInfo;
-            return model;
+            var words = await _wordRepository.FindAllAsync(x=>x.TaskId == id);
+
+            return words
+                .Where(w => w.TaskId == id)
+                .OrderBy(x => x.Index)
+                .Select(x => new ShowResultViewModel
+                {
+                    StartTime = x.StartTime,
+                    FinishTime = x.FinishTime,
+                    Value = x.Value
+                }).ToArray();
         }
 
         private static bool GetFormatValid(string format)

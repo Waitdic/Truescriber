@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Truescriber.DAL.Entities;
 using Microsoft.AspNetCore.Authorization;
-using Truescriber.BLL.Clients.SpeechToTextModels;
 using Truescriber.BLL.Interfaces;
 using Truescriber.BLL.Services.Task.Models;
 using Truescriber.BLL.Services.User.IdentityModels;

@@ -40,9 +40,9 @@ namespace Truescriber.BLL.Clients
             {
                 foreach (var alternative in result.Alternatives)
                 {
-                    _model.Text = alternative.Transcript;
                     var count = alternative.Words.Count;
                     _model.WordInfo = new WordInfo[count];
+
                     for (var i = 0; i < count; i++)
                         _model.WordInfo[i] = alternative.Words[i];
                 }
@@ -67,7 +67,6 @@ namespace Truescriber.BLL.Clients
             {
                 foreach (var alternative in result.Alternatives)
                 {
-                    _model.Text = alternative.Transcript;
                     var count = alternative.Words.Count;
                     _model.WordInfo = new WordInfo[count];
                     for (var i = 0; i < count; i++)

@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Truescriber.BLL.Services.User.IdentityModels;
-using Truescriber.DAL.Entities;
 using Task = System.Threading.Tasks.Task;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ModelBinding;

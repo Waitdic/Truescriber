@@ -1,4 +1,4 @@
-﻿@model Truescriber.BLL.Clients.SpeechToTextModels.SpeechToTextViewModel;
+﻿@model IEnumerable<Truescriber.BLL.Services.Models.ShowResultModel.ShowResultViewModel>;
 
 @{
     ViewData["Title"] = "ShowResult";
@@ -14,23 +14,12 @@
 </div>
 <br />
 <div>
-    <p>@Model.Text</p>
-    <br />
+    @foreach (var item in Model)
+    {
+        <span title="Start: @item.StartTime.TotalSeconds sec;      
+           Finish: @item.FinishTime.TotalSeconds sec;" class="modal-title" >@item.Value</span>
+    }
+    <br/>
     <div>
-        <table class="table table-hover text-info">
-            <tr>
-                <td>Word</td>
-                <td>StartTime</td>
-                <td>EndTime</td>
-            </tr>
-            @foreach (var item in Model.WordInfo)
-            {
-                <tr>
-                    <td>@item.Word</td>
-                    <td>@item.StartTime</td>
-                    <td>@item.EndTime</td>
-                </tr>
-            }
-        </table>
     </div>
 </div>

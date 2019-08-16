@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using Google.Cloud.Speech.V1;
 
 namespace Truescriber.DAL.Entities.Tasks
 {
@@ -43,8 +43,7 @@ namespace Truescriber.DAL.Entities.Tasks
         public byte[] File { get; protected set; }
         public bool DurationMoreMinute { get; protected set; }
 
-        public string Text { get; protected set; }
-        public WordInfo[] WordsTimeInfo { get; protected set; }
+        public ICollection<Word> Words { get; set; }
 
         public string UserId { get; protected set; }
         [ForeignKey("UserId")] public virtual User User { get; set; }
@@ -65,7 +64,7 @@ namespace Truescriber.DAL.Entities.Tasks
         public void ChangeStatus(TaskStatus status)
         {
             var dif = Status - status;
-            if (dif > 1 || dif < 0)
+            if (dif < -1 || dif > 0)
                 throw new ArgumentException("The process cannot be skipped and cannot be reversed");
 
             Status = status;
@@ -79,15 +78,6 @@ namespace Truescriber.DAL.Entities.Tasks
         public void SetFinishTime()
         {
             FinishTime = DateTime.UtcNow;
-        }
-
-        public void AddRecognizeResult(string text, WordInfo[] item)
-        {
-            if(string.IsNullOrWhiteSpace(text))
-                throw new ArgumentException("File cannot be empty ");
-
-            Text = text;
-            WordsTimeInfo = item;
         }
     }
 }

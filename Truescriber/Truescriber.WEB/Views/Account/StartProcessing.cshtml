@@ -1,4 +1,4 @@
-﻿@model Truescriber.BLL.Services.Task.Models.ResultViewModel;
+﻿@model Truescriber.BLL.Clients.SpeechToTextModels.SpeechToTextViewModel;
 @{
     ViewData["Title"] = "StartProcessing";
 }
@@ -13,5 +13,23 @@
 </div>
 <br/>
 <div>
-    <p>@Model.TextResult</p>
+    <p>@Model.Text</p>
+    <br/>
+    <div>
+        <table>
+            <tr>
+                <td>Word</td>
+                <td>StartTime</td>
+                <td>EndTime</td>
+            </tr>
+            @foreach (var item in Model.WordInfo)
+            {
+                <tr>
+                    <td>@item.Word</td>
+                    <td>@item.StartTime</td>
+                    <td>@item.EndTime</td>
+                </tr>
+            }
+        </table>
+    </div>
 </div>

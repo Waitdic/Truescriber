@@ -11,6 +11,7 @@ using Truescriber.Common.Helpers;
 using Truescriber.DAL.Interfaces;
 using TaskStatus = Truescriber.DAL.Entities.Tasks.TaskStatus;
 using Truescriber.BLL.Clients;
+using Truescriber.BLL.Clients.SpeechToTextModels;
 
 namespace Truescriber.BLL.Services.Task
 {
@@ -89,9 +90,9 @@ namespace Truescriber.BLL.Services.Task
             await _taskRepository.SaveChangeAsync();
         }
 
-        public async Task<string> StartProcessing(int id)
+        public async Task<SpeechToTextViewModel> StartProcessing(int id)
         {
-            var result = "";
+            var result = new SpeechToTextViewModel();
             var task = await _taskRepository.Get(id);
 
             if (!task.DurationMoreMinute)
@@ -103,7 +104,7 @@ namespace Truescriber.BLL.Services.Task
             else
             {
                 task.SetStartTime();
-                result = await SpeechToTextClient.AsyncRecognize(task.File);
+                //result = await SpeechToTextClient.AsyncRecognize(task.File);
                 task.SetFinishTime();
             }
 

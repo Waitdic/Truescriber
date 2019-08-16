@@ -90,9 +90,9 @@ namespace Truescriber.BLL.Services.Task
             await _taskRepository.SaveChangeAsync();
         }
 
-        public async Task<SpeechToTextViewModel> StartProcessing(int id)
+        public async System.Threading.Tasks.Task StartProcessing(int id)
         {
-            var result = new SpeechToTextViewModel();
+            SpeechToTextViewModel result;
             var task = await _taskRepository.Get(id);
 
             if (!task.DurationMoreMinute)
@@ -104,13 +104,22 @@ namespace Truescriber.BLL.Services.Task
             else
             {
                 task.SetStartTime();
-                //result = await SpeechToTextClient.AsyncRecognize(task.File);
+                result = await SpeechToTextClient.AsyncRecognize(task.File);
                 task.SetFinishTime();
             }
 
+            task.AddRecognizeResult(result.Text, result.WordInfo);
             _taskRepository.Update(task);
             await _taskRepository.SaveChangeAsync();
-            return result;
+        }
+
+        public async Task<SpeechToTextViewModel> ShowResult(int id)
+        {
+            SpeechToTextViewModel model = null;
+            var task = await _taskRepository.Get(id);
+            model.Text = task.Text;
+            model.WordInfo = task.WordsTimeInfo;
+            return model;
         }
 
         private static bool GetFormatValid(string format)

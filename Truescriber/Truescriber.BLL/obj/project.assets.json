@@ -1274,27 +1274,6 @@
           }
         }
       },
-      "Microsoft.WindowsAPICodePack.Core/1.1.0": {
-        "type": "package",
-        "compile": {
-          "lib/Microsoft.WindowsAPICodePack.dll": {}
-        },
-        "runtime": {
-          "lib/Microsoft.WindowsAPICodePack.dll": {}
-        }
-      },
-      "Microsoft.WindowsAPICodePack.Shell/1.1.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.WindowsAPICodePack.Core": "1.1.0"
-        },
-        "compile": {
-          "lib/Microsoft.WindowsAPICodePack.Shell.dll": {}
-        },
-        "runtime": {
-          "lib/Microsoft.WindowsAPICodePack.Shell.dll": {}
-        }
-      },
       "NETStandard.Library/2.0.3": {
         "type": "package",
         "dependencies": {
@@ -1532,6 +1511,7 @@
         "framework": ".NETCoreApp,Version=v2.1",
         "dependencies": {
           "EntityFramework": "6.2.0",
+          "Google.Cloud.Speech.V1": "1.2.0",
           "Microsoft.AspNetCore": "2.1.7",
           "Microsoft.AspNetCore.Identity": "2.1.6",
           "Microsoft.Extensions.Identity.Stores": "2.1.1"
@@ -3049,30 +3029,6 @@
         "version.txt"
       ]
     },
-    "Microsoft.WindowsAPICodePack.Core/1.1.0": {
-      "sha512": "szH5i6kUEuukCJN2vxPKRKvrTrtb759ScSWvlzN0lA9LNfZZQiauqqE5UrMZUdt5GzlJFSHfHkdcIe4qEC7Z1A==",
-      "type": "package",
-      "path": "microsoft.windowsapicodepack.core/1.1.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/Microsoft.WindowsAPICodePack.dll",
-        "microsoft.windowsapicodepack.core.1.1.0.nupkg.sha512",
-        "microsoft.windowsapicodepack.core.nuspec"
-      ]
-    },
-    "Microsoft.WindowsAPICodePack.Shell/1.1.0": {
-      "sha512": "mf++Hez9kbikfIuwz4uCdQRwJDpd38rCD/F5CWU78tzyZtpEsUR6oWOX8ea59XvQ3hLitm2zZe3fXEgTD5Qyxg==",
-      "type": "package",
-      "path": "microsoft.windowsapicodepack.shell/1.1.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/Microsoft.WindowsAPICodePack.Shell.dll",
-        "microsoft.windowsapicodepack.shell.1.1.0.nupkg.sha512",
-        "microsoft.windowsapicodepack.shell.nuspec"
-      ]
-    },
     "NETStandard.Library/2.0.3": {
       "sha512": "st47PosZSHrjECdjeIzZQbzivYBJFv6P2nv4cj2ypdI204DO+vZ7l5raGMiX4eXMJ53RfOIg+/s4DHVZ54Nu2A==",
       "type": "package",
@@ -3827,7 +3783,6 @@
       "Google.Cloud.Speech.V1 >= 1.2.0",
       "Microsoft.AspNet.Mvc >= 5.2.7",
       "Microsoft.NETCore.App >= 2.1.0",
-      "Microsoft.WindowsAPICodePack.Shell >= 1.1.0",
       "Truescriber.Common >= 1.0.0",
       "Truescriber.DAL >= 1.0.0"
     ]
@@ -3896,10 +3851,6 @@
             "target": "Package",
             "version": "[2.1.0, )",
             "autoReferenced": true
-          },
-          "Microsoft.WindowsAPICodePack.Shell": {
-            "target": "Package",
-            "version": "[1.1.0, )"
           }
         },
         "imports": [
@@ -3957,26 +3908,6 @@
       "warningLevel": 1,
       "message": "Пакет \"Microsoft.Web.Infrastructure 1.0.0\" был восстановлен с помощью \".NETFramework,Version=v4.6.1\", а не целевой платформы проекта \".NETCoreApp,Version=v2.1\". Этот пакет может быть не полностью совместим с вашим проектом.",
       "libraryId": "Microsoft.Web.Infrastructure",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v2.1"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Пакет \"Microsoft.WindowsAPICodePack.Core 1.1.0\" был восстановлен с помощью \".NETFramework,Version=v4.6.1\", а не целевой платформы проекта \".NETCoreApp,Version=v2.1\". Этот пакет может быть не полностью совместим с вашим проектом.",
-      "libraryId": "Microsoft.WindowsAPICodePack.Core",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v2.1"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Пакет \"Microsoft.WindowsAPICodePack.Shell 1.1.0\" был восстановлен с помощью \".NETFramework,Version=v4.6.1\", а не целевой платформы проекта \".NETCoreApp,Version=v2.1\". Этот пакет может быть не полностью совместим с вашим проектом.",
-      "libraryId": "Microsoft.WindowsAPICodePack.Shell",
       "targetGraphs": [
         ".NETCoreApp,Version=v2.1"
       ]

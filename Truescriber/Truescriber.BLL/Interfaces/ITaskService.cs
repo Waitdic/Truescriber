@@ -17,7 +17,7 @@ namespace Truescriber.BLL.Interfaces
 
         Task EditTask(EditTaskViewModel item);
         Task DeleteTask(int id);
-
-        Task<SpeechToTextViewModel> StartProcessing(int id);
+        Task StartProcessing(int id);
+        Task<SpeechToTextViewModel> ShowResult(int id);
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Truescriber.DAL.Entities;
 using Microsoft.AspNetCore.Authorization;
+using Truescriber.BLL.Clients.SpeechToTextModels;
 using Truescriber.BLL.Interfaces;
 using Truescriber.BLL.Services.Task.Models;
 using Truescriber.BLL.Services.User.IdentityModels;
@@ -114,8 +115,14 @@ namespace Truescriber.WEB.Controllers
 
         public async Task<IActionResult> StartProcessing(int id)
         {
-            var result = await _taskService.StartProcessing(id);
-            return View(result);
+          await _taskService.StartProcessing(id);
+          return RedirectToAction("TaskList");
+        }
+
+        public async Task<IActionResult> ShowResult(int id)
+        {
+            var showResult = await _taskService.ShowResult(id);
+            return View(showResult);
         }
 
         [ValidateAntiForgeryToken]

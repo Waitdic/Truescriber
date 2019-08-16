@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using Google.Cloud.Speech.V1;
 
 namespace Truescriber.DAL.Entities.Tasks
 {
@@ -42,6 +43,9 @@ namespace Truescriber.DAL.Entities.Tasks
         public byte[] File { get; protected set; }
         public bool DurationMoreMinute { get; protected set; }
 
+        public string Text { get; protected set; }
+        public WordInfo[] WordsTimeInfo { get; protected set; }
+
         public string UserId { get; protected set; }
         [ForeignKey("UserId")] public virtual User User { get; set; }
 
@@ -75,6 +79,15 @@ namespace Truescriber.DAL.Entities.Tasks
         public void SetFinishTime()
         {
             FinishTime = DateTime.UtcNow;
+        }
+
+        public void AddRecognizeResult(string text, WordInfo[] item)
+        {
+            if(string.IsNullOrWhiteSpace(text))
+                throw new ArgumentException("File cannot be empty ");
+
+            Text = text;
+            WordsTimeInfo = item;
         }
     }
 }

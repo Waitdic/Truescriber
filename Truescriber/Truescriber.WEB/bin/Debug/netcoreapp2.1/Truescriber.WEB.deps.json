@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.1",
-    "signature": "7147675d7b97ea2a52df0196ec6bb89416768e42"
+    "signature": "25cd273e5bd683b95e13dc9149425df4b668ccca"
   },
   "compilationOptions": {
     "defines": [
@@ -30,7 +30,6 @@
           "Microsoft.AspNetCore.Razor.Design": "2.1.2",
           "Microsoft.NETCore.App": "2.1.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.1.9",
-          "Microsoft.WindowsAPICodePack.Shell": "1.1.0",
           "Truescriber.BLL": "1.0.0",
           "Truescriber.DAL": "1.0.0"
         },
@@ -882,31 +881,6 @@
           "lib/net40/Microsoft.Web.Infrastructure.dll": {}
         }
       },
-      "Microsoft.WindowsAPICodePack.Core/1.1.0": {
-        "runtime": {
-          "lib/Microsoft.WindowsAPICodePack.dll": {
-            "assemblyVersion": "1.1.0.0",
-            "fileVersion": "1.1.0.0"
-          }
-        },
-        "compile": {
-          "lib/Microsoft.WindowsAPICodePack.dll": {}
-        }
-      },
-      "Microsoft.WindowsAPICodePack.Shell/1.1.0": {
-        "dependencies": {
-          "Microsoft.WindowsAPICodePack.Core": "1.1.0"
-        },
-        "runtime": {
-          "lib/Microsoft.WindowsAPICodePack.Shell.dll": {
-            "assemblyVersion": "1.1.0.0",
-            "fileVersion": "1.1.0.0"
-          }
-        },
-        "compile": {
-          "lib/Microsoft.WindowsAPICodePack.Shell.dll": {}
-        }
-      },
       "NETStandard.Library/2.0.3": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "2.1.0"
@@ -1130,7 +1104,6 @@
         "dependencies": {
           "Google.Cloud.Speech.V1": "1.2.0",
           "Microsoft.AspNet.Mvc": "5.2.7",
-          "Microsoft.WindowsAPICodePack.Shell": "1.1.0",
           "Truescriber.Common": "1.0.0",
           "Truescriber.DAL": "1.0.0"
         },
@@ -1152,6 +1125,7 @@
       "Truescriber.DAL/1.0.0": {
         "dependencies": {
           "EntityFramework": "6.2.0",
+          "Google.Cloud.Speech.V1": "1.2.0",
           "Microsoft.AspNetCore": "2.1.7",
           "Microsoft.AspNetCore.Identity": "2.1.6",
           "Microsoft.Extensions.Identity.Stores": "2.1.1"
@@ -4255,20 +4229,6 @@
       "sha512": "sha512-FNmvLn5m2LTU/Rs2KWVo0SIIh9Ek+U0ojex7xeDaSHw/zgEP77A8vY5cVWgUtBGS8MJfDGNn8rpXJWEIQaPwTg==",
       "path": "microsoft.web.infrastructure/1.0.0",
       "hashPath": "microsoft.web.infrastructure.1.0.0.nupkg.sha512"
-    },
-    "Microsoft.WindowsAPICodePack.Core/1.1.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-szH5i6kUEuukCJN2vxPKRKvrTrtb759ScSWvlzN0lA9LNfZZQiauqqE5UrMZUdt5GzlJFSHfHkdcIe4qEC7Z1A==",
-      "path": "microsoft.windowsapicodepack.core/1.1.0",
-      "hashPath": "microsoft.windowsapicodepack.core.1.1.0.nupkg.sha512"
-    },
-    "Microsoft.WindowsAPICodePack.Shell/1.1.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-mf++Hez9kbikfIuwz4uCdQRwJDpd38rCD/F5CWU78tzyZtpEsUR6oWOX8ea59XvQ3hLitm2zZe3fXEgTD5Qyxg==",
-      "path": "microsoft.windowsapicodepack.shell/1.1.0",
-      "hashPath": "microsoft.windowsapicodepack.shell.1.1.0.nupkg.sha512"
     },
     "NETStandard.Library/2.0.3": {
       "type": "package",

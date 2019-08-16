@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.1",
-    "signature": "94766d74df72e126d9ad536a109b3af7f78b4d9b"
+    "signature": "b0deff9a28327d7f42723c9440a7922d4635cde0"
   },
   "compilationOptions": {},
   "targets": {
@@ -10,7 +10,6 @@
         "dependencies": {
           "Google.Cloud.Speech.V1": "1.2.0",
           "Microsoft.AspNet.Mvc": "5.2.7",
-          "Microsoft.WindowsAPICodePack.Shell": "1.1.0",
           "Truescriber.Common": "1.0.0",
           "Truescriber.DAL": "1.0.0",
           "Microsoft.AspNetCore.Mvc.Abstractions": "2.1.1.0",
@@ -1033,25 +1032,6 @@
           }
         }
       },
-      "Microsoft.WindowsAPICodePack.Core/1.1.0": {
-        "runtime": {
-          "lib/Microsoft.WindowsAPICodePack.dll": {
-            "assemblyVersion": "1.1.0.0",
-            "fileVersion": "1.1.0.0"
-          }
-        }
-      },
-      "Microsoft.WindowsAPICodePack.Shell/1.1.0": {
-        "dependencies": {
-          "Microsoft.WindowsAPICodePack.Core": "1.1.0"
-        },
-        "runtime": {
-          "lib/Microsoft.WindowsAPICodePack.Shell.dll": {
-            "assemblyVersion": "1.1.0.0",
-            "fileVersion": "1.1.0.0"
-          }
-        }
-      },
       "Newtonsoft.Json/11.0.2": {
         "runtime": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {
@@ -1190,6 +1170,7 @@
       "Truescriber.DAL/1.0.0": {
         "dependencies": {
           "EntityFramework": "6.2.0",
+          "Google.Cloud.Speech.V1": "1.2.0",
           "Microsoft.AspNetCore": "2.1.7",
           "Microsoft.AspNetCore.Identity": "2.1.6",
           "Microsoft.Extensions.Identity.Stores": "2.1.1",
@@ -1805,20 +1786,6 @@
       "sha512": "sha512-+FWlwd//+Tt56316p00hVePBCouXyEzT86Jb3+AuRotTND0IYn0OO3obs1gnQEs/txEnt+rF2JBGLItTG+Be6A==",
       "path": "microsoft.win32.registry/4.5.0",
       "hashPath": "microsoft.win32.registry.4.5.0.nupkg.sha512"
-    },
-    "Microsoft.WindowsAPICodePack.Core/1.1.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-szH5i6kUEuukCJN2vxPKRKvrTrtb759ScSWvlzN0lA9LNfZZQiauqqE5UrMZUdt5GzlJFSHfHkdcIe4qEC7Z1A==",
-      "path": "microsoft.windowsapicodepack.core/1.1.0",
-      "hashPath": "microsoft.windowsapicodepack.core.1.1.0.nupkg.sha512"
-    },
-    "Microsoft.WindowsAPICodePack.Shell/1.1.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-mf++Hez9kbikfIuwz4uCdQRwJDpd38rCD/F5CWU78tzyZtpEsUR6oWOX8ea59XvQ3hLitm2zZe3fXEgTD5Qyxg==",
-      "path": "microsoft.windowsapicodepack.shell/1.1.0",
-      "hashPath": "microsoft.windowsapicodepack.shell.1.1.0.nupkg.sha512"
     },
     "Newtonsoft.Json/11.0.2": {
       "type": "package",

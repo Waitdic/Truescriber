@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Data.Entity.Core.Metadata.Edm;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Google.Apis.Auth.OAuth2;
 using Google.Cloud.Speech.V1;
 using Grpc.Auth;
@@ -12,12 +10,11 @@ namespace Truescriber.BLL.Clients
     public class SpeechToTextClient : ISpeechClient
     {
         private const string CredentialPath = @"E:\gitlab\Truescriber-3bf1c969ac47.json";
-        private string _text;
-        private readonly SpeechToTextViewModel model;
+        private readonly SpeechToTextViewModel _model;
 
         public SpeechToTextClient()
         {
-            model = new SpeechToTextViewModel();
+            _model = new SpeechToTextViewModel();
         }
 
         private static SpeechClient SpeechProperty()
@@ -43,23 +40,17 @@ namespace Truescriber.BLL.Clients
             {
                 foreach (var alternative in result.Alternatives)
                 {
-                    model.Text = alternative.Transcript;
+                    _model.Text = alternative.Transcript;
                     var count = alternative.Words.Count;
-                    model.WordInfo = new WordInfo[count];
-                    //var i = 0;
-                    /*foreach (var item in alternative.Words)
-                    {
-                        model.WordInfo.Add(item);
-                        //i++;
-                    }*/
+                    _model.WordInfo = new WordInfo[count];
                     for (var i = 0; i < count; i++)
-                        model.WordInfo[i] = alternative.Words[i];
+                        _model.WordInfo[i] = alternative.Words[i];
                 }
             }
-            return model;
+            return _model;
         }
 
-        public async Task<string> AsyncRecognize(byte[] file)
+        public async Task<SpeechToTextViewModel> AsyncRecognize(byte[] file)
         {
             var longOperation = await SpeechProperty().LongRunningRecognizeAsync(new RecognitionConfig()
             {
@@ -76,14 +67,14 @@ namespace Truescriber.BLL.Clients
             {
                 foreach (var alternative in result.Alternatives)
                 {
-                    _text += alternative.Transcript;
-                    foreach (var item in alternative.Words)
-                    {
-                        _text += "   :Word - " + item.Word + "   :StartTime - " + item.StartTime + "   :FinishTime - " + item.EndTime ;
-                    }
+                    _model.Text = alternative.Transcript;
+                    var count = alternative.Words.Count;
+                    _model.WordInfo = new WordInfo[count];
+                    for (var i = 0; i < count; i++)
+                        _model.WordInfo[i] = alternative.Words[i];
                 }
             }
-            return _text;
+            return _model;
         }
     }
 }

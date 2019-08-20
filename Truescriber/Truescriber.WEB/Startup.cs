@@ -16,7 +16,6 @@ namespace Truescriber.WEB
 
         public IConfiguration Configuration { get; }
 
-        
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<CookiePolicyOptions>(options =>
@@ -54,7 +53,6 @@ namespace Truescriber.WEB
                     name: "default",
                     template: "{controller=Account}/{action=Login}/{id?}");
             });
-           
         }
     }
 }

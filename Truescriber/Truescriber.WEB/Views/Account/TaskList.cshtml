@@ -1,21 +1,8 @@
-﻿@using System.Data
-@using TaskStatus = Truescriber.DAL.Entities.Tasks.TaskStatus
+﻿@using TaskStatus = Truescriber.DAL.Entities.Tasks.TaskStatus
 @model Truescriber.BLL.Services.Models.PageModel.PagedTaskList;
 @{
     ViewData["Title"] = "Home Page";
 }
-<style type="text/css">.justify-content-center { }
-
- .spinner-border { }
-
- .d-flex { }
-</style>
-
-<div class="d-flex justify-content-center">
-    <div class="spinner-border" role="status">
-        <span class="sr-only">Loading...</span>
-    </div>
-</div>
 
 <div align="center">
     <br />
@@ -63,7 +50,7 @@
                     else
                     {
                         <p>Start time: @task.Task.StartTime</p><br />
-                        <p>Finish time: @task.Task.FinishTime</p> 
+                        <p>Finish time: @task.Task.FinishTime</p>
                     }
                 </td>
                 <td>@task.Task.Status</td>
@@ -107,7 +94,6 @@
         <p>@Model.PagedViewModel.PageNumber</p>
     </div>
 
-
     @if (Model.PagedViewModel.HasPreviousPage)
         {
             <a asp-action="TaskList"
@@ -127,5 +113,5 @@
                 <i class="glyphicon glyphicon-chevron-right"></i>
             </a>
         }
-        
+
 </div>

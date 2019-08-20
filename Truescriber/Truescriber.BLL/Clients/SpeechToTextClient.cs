@@ -28,13 +28,13 @@ namespace Truescriber.BLL.Clients
         public async Task<SpeechToTextViewModel> SyncRecognize(byte[] file)
         {
             var response = await SpeechProperty().RecognizeAsync(new RecognitionConfig()
-            {
-                Encoding = RecognitionConfig.Types.AudioEncoding.Flac,
-                SampleRateHertz = 48000,
-                LanguageCode = "en",
-                EnableAutomaticPunctuation = true,
-                EnableWordTimeOffsets = true
-            }, RecognitionAudio.FromBytes(file));
+                {
+                    Encoding = RecognitionConfig.Types.AudioEncoding.Flac,
+                    SampleRateHertz = 16000,
+                    LanguageCode = "en",
+                    EnableAutomaticPunctuation = true,
+                    EnableWordTimeOffsets = true
+                }, RecognitionAudio.FromBytes(file));
 
             foreach (var result in response.Results)
             {
@@ -55,7 +55,7 @@ namespace Truescriber.BLL.Clients
             var longOperation = await SpeechProperty().LongRunningRecognizeAsync(new RecognitionConfig()
             {
                 Encoding = RecognitionConfig.Types.AudioEncoding.Flac,
-                SampleRateHertz = 48000,
+                SampleRateHertz = 16000,
                 LanguageCode = "en",
                 EnableAutomaticPunctuation = true,
                 EnableWordTimeOffsets = true

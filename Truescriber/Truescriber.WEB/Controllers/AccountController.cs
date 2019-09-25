@@ -112,6 +112,18 @@ namespace Truescriber.WEB.Controllers
             return RedirectToAction("TaskList");
         }
 
+        public async Task<IActionResult> StartProcessing(int id)
+        {
+          await _taskService.StartProcessing(id);
+          return RedirectToAction("TaskList");
+        }
+
+        public async Task<IActionResult> ShowResult(int id)
+        {
+            var showResult = await _taskService.ShowResult(id);
+            return View(showResult);
+        }
+
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {

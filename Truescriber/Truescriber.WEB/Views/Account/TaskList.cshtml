@@ -1,4 +1,5 @@
-﻿@model Truescriber.BLL.Services.Models.PageModel.PagedTaskList;
+﻿@using TaskStatus = Truescriber.DAL.Entities.Tasks.TaskStatus
+@model Truescriber.BLL.Services.Models.PageModel.PagedTaskList;
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -30,6 +31,7 @@
             <th scope="col">Time</th>
             <th scope="col">Status</th>
             <th></th>
+            <th scope="col">Result</th>
         </tr>
         @foreach (var task in Model.TaskViewModels)
         {
@@ -41,22 +43,48 @@
                     Size: @task.FileSize
                 </td>
                 <td>
-                    Start time: @task.Task.CreateTime <br />
+                    @if (task.Task.StartTime == DateTime.MinValue)
+                    {
+                        <p>Create time: @task.Task.CreateTime</p>
+                    }
+                    else
+                    {
+                        <p>Start time: @task.Task.StartTime</p><br />
+                        <p>Finish time: @task.Task.FinishTime</p>
+                    }
                 </td>
                 <td>@task.Task.Status</td>
                 <td>
                     <form asp-action="Delete" asp-route-id="@task.Task.Id" method="post">
-                        <a class="btn btn-sm btn-primary"
-                           asp-action="Edit"
-                           asp-route-id="@task.Task.Id"
-                           asp-route-taskName="@task.Task.TaskName">
-                            Edit
-                        </a>
+                        @if (task.Task.Status != TaskStatus.Finished)
+                        {
+                            <a class="btn btn-sm btn-primary"
+                               asp-action="StartProcessing"
+                               asp-route-id="@task.Task.Id">
+                                Start Processing
+                            </a>
+                            <a class="btn btn-sm btn-info"
+                               asp-action="Edit"
+                               asp-route-id="@task.Task.Id"
+                               asp-route-taskName="@task.Task.TaskName">
+                                Edit
+                            </a>
+                        }
                         <button type="submit"
                                 class="btn btn-sm btn-danger">
                             Delete
                         </button>
                     </form>
+                </td>
+                <td>
+                    @if (task.Task.Status == TaskStatus.Finished)
+                    {
+                        <a class="btn btn-sm btn-primary"
+                           asp-action="ShowResult"
+                           asp-route-id="@task.Task.Id">
+                           Result
+                        </a>
+                    }
                 </td>
             </tr>
         }
@@ -65,7 +93,6 @@
     <div align="center">
         <p>@Model.PagedViewModel.PageNumber</p>
     </div>
-
 
     @if (Model.PagedViewModel.HasPreviousPage)
         {
@@ -86,5 +113,5 @@
                 <i class="glyphicon glyphicon-chevron-right"></i>
             </a>
         }
-        
+
 </div>

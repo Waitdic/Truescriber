@@ -137,6 +137,8 @@ namespace Truescriber.DAL.Migrations
 
                     b.Property<DateTime>("CreateTime");
 
+                    b.Property<bool>("DurationMoreMinute");
+
                     b.Property<byte[]>("File");
 
                     b.Property<string>("FileName");
@@ -223,6 +225,29 @@ namespace Truescriber.DAL.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("Truescriber.DAL.Entities.Word", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<TimeSpan>("FinishTime");
+
+                    b.Property<int>("Index");
+
+                    b.Property<TimeSpan>("StartTime");
+
+                    b.Property<int>("TaskId");
+
+                    b.Property<string>("Value");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TaskId");
+
+                    b.ToTable("Words");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
@@ -273,6 +298,14 @@ namespace Truescriber.DAL.Migrations
                     b.HasOne("Truescriber.DAL.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("Truescriber.DAL.Entities.Word", b =>
+                {
+                    b.HasOne("Truescriber.DAL.Entities.Tasks.Task", "Task")
+                        .WithMany("Words")
+                        .HasForeignKey("TaskId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

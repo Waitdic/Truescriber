@@ -1,6 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Truescriber.BLL.Clients.SpeechToTextModels;
 using Truescriber.BLL.Services.Models.PageModel;
+using Truescriber.BLL.Services.Models.ShowResultModel;
 using Truescriber.BLL.Services.Task.Models;
 
 namespace Truescriber.BLL.Interfaces
@@ -16,5 +18,7 @@ namespace Truescriber.BLL.Interfaces
 
         Task EditTask(EditTaskViewModel item);
         Task DeleteTask(int id);
+        Task StartProcessing(int id);
+        Task<ShowResultViewModel[]> ShowResult(int id);
     }
 }

@@ -10,6 +10,7 @@ namespace Truescriber.Common.Helpers
             "audio/raw",
             "audio/wav",
             "audio/mp3",
+            "audio/amr",
             "audio/arm-wb",
             "audio/ogg",
             "video/avi",
@@ -29,6 +30,7 @@ namespace Truescriber.Common.Helpers
                                         "\n .raw" +
                                         "\n .wav" +
                                         "\n .mp3" +
+                                        "\n .amr" +
                                         "\n .arm-wb" +
                                         "\n .ogg" +
                                         "\n .avi" +

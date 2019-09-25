@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Truescriber.BLL.Services.Models.ShowResultModel.ShowResultViewModel>;
+
+@{
+    ViewData["Title"] = "ShowResult";
+}
+
+<h2 align="center">Text</h2>
+<br />
+<div align="left">
+    <a asp-action="TaskList" class="btn btn-default btn">
+        Back
+        <i class="glyphicon glyphicon-chevron-left"></i>
+    </a>
+</div>
+<br />
+<div>
+    @foreach (var item in Model)
+    {
+        <span title="Start: @item.StartTime.TotalSeconds sec;&#10;&#13;Finish: @item.FinishTime.TotalSeconds sec;" class="modal-title" >@item.Value</span>
+    }
+    <br/>
+    <div>
+    </div>
+</div>

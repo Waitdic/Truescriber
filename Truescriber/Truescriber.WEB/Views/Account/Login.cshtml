@@ -1,6 +1,6 @@
 ﻿@model Truescriber.BLL.Services.User.IdentityModels.LoginViewModel
 
-<h2 align="center" >Login to app</h2>
+<h2 align="center">Login to app</h2>
 <div>
     <form method="post" asp-controller="Account" asp-action="Login">
         <div align="center" asp-validation-summary="ModelOnly"></div>
@@ -16,7 +16,7 @@
 
             <div align="center">
                 <div align="center">
-                    <label asp-for="Password"></label><br />
+                    <label asp-for="Password" ></label><br />
                     <input asp-for="Password" />
                 </div>
                 <span asp-validation-for="Password"></span>
@@ -25,7 +25,7 @@
         </div>
         <br />
         <div align="center">
-            <input class="btn-danger" type="submit" value="Log in" />
+            <input class="btn btn-sm btn-danger" type="submit" value="Log in" />
         </div>
     </form>
 </div>

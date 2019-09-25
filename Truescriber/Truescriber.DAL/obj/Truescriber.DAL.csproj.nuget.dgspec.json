@@ -47,6 +47,10 @@
               "target": "Package",
               "version": "[6.2.0, )"
             },
+            "Google.Cloud.Speech.V1": {
+              "target": "Package",
+              "version": "[1.2.0, )"
+            },
             "Microsoft.AspNetCore": {
               "target": "Package",
               "version": "[2.1.7, )"

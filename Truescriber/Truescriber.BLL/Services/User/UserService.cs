@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Truescriber.BLL.Interfaces;
 using Truescriber.BLL.Services.User.IdentityModels;
-using Truescriber.Common.Helpers;
 
 namespace Truescriber.BLL.Services.User
 {

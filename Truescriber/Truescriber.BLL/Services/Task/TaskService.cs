@@ -10,18 +10,28 @@ using Truescriber.BLL.Services.Task.Models;
 using Truescriber.Common.Helpers;
 using Truescriber.DAL.Interfaces;
 using TaskStatus = Truescriber.DAL.Entities.Tasks.TaskStatus;
+using Truescriber.BLL.Clients;
+using Truescriber.BLL.Clients.SpeechToTextModels;
+using Truescriber.BLL.Services.Models.ShowResultModel;
+using Truescriber.DAL.Entities;
 
 namespace Truescriber.BLL.Services.Task
 {
     public class TaskService : ITaskService
     {
         private readonly IRepository<DAL.Entities.Tasks.Task> _taskRepository;
+        private readonly IRepository<Word> _wordRepository;
         public static FormatHelper FormatHelper;
+        public static SpeechToTextClient SpeechToTextClient;
 
-        public TaskService(IRepository<DAL.Entities.Tasks.Task> taskRep)
-        {
+        public TaskService(
+            IRepository<DAL.Entities.Tasks.Task> taskRep,
+            IRepository<Word> wordRepository
+        ){
             _taskRepository = taskRep;
+            _wordRepository = wordRepository;
             FormatHelper = new FormatHelper();
+            SpeechToTextClient = new SpeechToTextClient();
         }
 
         public async Task<PagedTaskList> CreateTaskList(int page, string userId)
@@ -62,7 +72,11 @@ namespace Truescriber.BLL.Services.Task
                 return uploadModel;
             }
 
-            await CreateDescription(uploadModel.TaskName, uploadModel.File, id);
+            await CreateDescription(
+                uploadModel.TaskName, 
+                uploadModel.File, id, 
+                uploadModel.DurationMoreMinute
+                );
             return null;
         }
 
@@ -82,6 +96,66 @@ namespace Truescriber.BLL.Services.Task
             await _taskRepository.SaveChangeAsync();
         }
 
+        public async System.Threading.Tasks.Task StartProcessing(int id)
+        {
+            SpeechToTextViewModel result;
+            var task = await _taskRepository.Get(id);
+
+            if (!task.DurationMoreMinute)
+            {
+                task.SetStartTime();
+                task.ChangeStatus(TaskStatus.Processed);
+                _taskRepository.Update(task);
+                await _taskRepository.SaveChangeAsync();
+
+                result = await SpeechToTextClient.SyncRecognize(task.File);
+                task.SetFinishTime();
+            }
+            else
+            {
+                task.SetStartTime();
+                task.ChangeStatus(TaskStatus.Processed);
+                _taskRepository.Update(task);
+                await _taskRepository.SaveChangeAsync();
+
+                result = await SpeechToTextClient.AsyncRecognize(task.File);
+                task.SetFinishTime();
+            }
+
+            var i = 0;
+            foreach (var item in result.WordInfo)
+            {
+                var word = new Word(
+                    item.Word.ToString(),
+                    item.StartTime,
+                    item.EndTime,
+                    i,
+                    task.Id);
+                i++;
+                await _wordRepository.Create(word);
+                await _wordRepository.SaveChangeAsync();
+            }
+
+            task.ChangeStatus(TaskStatus.Finished);
+            _taskRepository.Update(task);
+            await _taskRepository.SaveChangeAsync();
+        }
+
+        public async Task<ShowResultViewModel[]> ShowResult(int id)
+        {
+            var words = await _wordRepository.FindAllAsync(x=>x.TaskId == id);
+
+            return words
+                .Where(w => w.TaskId == id)
+                .OrderBy(x => x.Index)
+                .Select(x => new ShowResultViewModel
+                {
+                    StartTime = x.StartTime,
+                    FinishTime = x.FinishTime,
+                    Value = x.Value
+                }).ToArray();
+        }
+
         private static bool GetFormatValid(string format)
         {
             var result = FormatHelper.GetFormats().Find((x) => x == format);
@@ -93,7 +167,11 @@ namespace Truescriber.BLL.Services.Task
             return "Supported formats:" + FormatHelper.SupportedFormatsMessage();
         }
 
-        private async System.Threading.Tasks.Task CreateDescription(string taskName, IFormFile file, string id)
+        private async System.Threading.Tasks.Task CreateDescription(
+            string taskName, 
+            IFormFile file, 
+            string id, 
+            bool durationMoreMinute)
         {
             var task = new DAL.Entities.Tasks.Task(
                 DateTime.UtcNow,
@@ -101,7 +179,9 @@ namespace Truescriber.BLL.Services.Task
                 file.FileName,
                 file.ContentType,
                 file.Length,
-                id);
+                id,
+                durationMoreMinute
+                );
 
             using (var binaryReader = new BinaryReader(file.OpenReadStream()))
             {

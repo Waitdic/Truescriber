@@ -1,17 +1,86 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Truescriber\\Truescriber\\Truescriber.WEB\\Truescriber.WEB.csproj": {}
+    "E:\\gitlab\\Truescriber\\Truescriber.WEB\\Truescriber.WEB.csproj": {}
   },
   "projects": {
-    "E:\\Truescriber\\Truescriber\\Truescriber.WEB\\Truescriber.WEB.csproj": {
+    "E:\\gitlab\\Truescriber\\Truescriber.BLL\\Truescriber.BLL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Truescriber\\Truescriber\\Truescriber.WEB\\Truescriber.WEB.csproj",
-        "projectName": "Truescriber.WEB",
-        "projectPath": "E:\\Truescriber\\Truescriber\\Truescriber.WEB\\Truescriber.WEB.csproj",
+        "projectUniqueName": "E:\\gitlab\\Truescriber\\Truescriber.BLL\\Truescriber.BLL.csproj",
+        "projectName": "Truescriber.BLL",
+        "projectPath": "E:\\gitlab\\Truescriber\\Truescriber.BLL\\Truescriber.BLL.csproj",
         "packagesPath": "C:\\Users\\Danis\\.nuget\\packages\\",
-        "outputPath": "E:\\Truescriber\\Truescriber\\Truescriber.WEB\\obj\\",
+        "outputPath": "E:\\gitlab\\Truescriber\\Truescriber.BLL\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "E:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Danis\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.1": {
+            "projectReferences": {
+              "E:\\gitlab\\Truescriber\\Truescriber.Common\\Truescriber.Common.csproj": {
+                "projectPath": "E:\\gitlab\\Truescriber\\Truescriber.Common\\Truescriber.Common.csproj"
+              },
+              "E:\\gitlab\\Truescriber\\Truescriber.DAL\\Truescriber.DAL.csproj": {
+                "projectPath": "E:\\gitlab\\Truescriber\\Truescriber.DAL\\Truescriber.DAL.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.1": {
+          "dependencies": {
+            "Google.Cloud.Speech.V1": {
+              "target": "Package",
+              "version": "[1.2.0, )"
+            },
+            "Microsoft.AspNet.Mvc": {
+              "target": "Package",
+              "version": "[5.2.7, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.1.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "E:\\gitlab\\Truescriber\\Truescriber.Common\\Truescriber.Common.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\gitlab\\Truescriber\\Truescriber.Common\\Truescriber.Common.csproj",
+        "projectName": "Truescriber.Common",
+        "projectPath": "E:\\gitlab\\Truescriber\\Truescriber.Common\\Truescriber.Common.csproj",
+        "packagesPath": "C:\\Users\\Danis\\.nuget\\packages\\",
+        "outputPath": "E:\\gitlab\\Truescriber\\Truescriber.Common\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "E:\\Microsoft\\Xamarin\\NuGet\\",
@@ -43,11 +112,152 @@
       "frameworks": {
         "netcoreapp2.1": {
           "dependencies": {
-            "Microsoft.AspNetCore.App": {
+            "Microsoft.NETCore.App": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[2.1.1, )",
+              "version": "[2.1.0, )",
               "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "E:\\gitlab\\Truescriber\\Truescriber.DAL\\Truescriber.DAL.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\gitlab\\Truescriber\\Truescriber.DAL\\Truescriber.DAL.csproj",
+        "projectName": "Truescriber.DAL",
+        "projectPath": "E:\\gitlab\\Truescriber\\Truescriber.DAL\\Truescriber.DAL.csproj",
+        "packagesPath": "C:\\Users\\Danis\\.nuget\\packages\\",
+        "outputPath": "E:\\gitlab\\Truescriber\\Truescriber.DAL\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "E:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Danis\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.1": {
+          "dependencies": {
+            "EntityFramework": {
+              "target": "Package",
+              "version": "[6.2.0, )"
+            },
+            "Google.Cloud.Speech.V1": {
+              "target": "Package",
+              "version": "[1.2.0, )"
+            },
+            "Microsoft.AspNetCore": {
+              "target": "Package",
+              "version": "[2.1.7, )"
+            },
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.1.6, )"
+            },
+            "Microsoft.Extensions.Identity.Stores": {
+              "target": "Package",
+              "version": "[2.1.1, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.1.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "E:\\gitlab\\Truescriber\\Truescriber.WEB\\Truescriber.WEB.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\gitlab\\Truescriber\\Truescriber.WEB\\Truescriber.WEB.csproj",
+        "projectName": "Truescriber.WEB",
+        "projectPath": "E:\\gitlab\\Truescriber\\Truescriber.WEB\\Truescriber.WEB.csproj",
+        "packagesPath": "C:\\Users\\Danis\\.nuget\\packages\\",
+        "outputPath": "E:\\gitlab\\Truescriber\\Truescriber.WEB\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "E:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Danis\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.1": {
+            "projectReferences": {
+              "E:\\gitlab\\Truescriber\\Truescriber.BLL\\Truescriber.BLL.csproj": {
+                "projectPath": "E:\\gitlab\\Truescriber\\Truescriber.BLL\\Truescriber.BLL.csproj"
+              },
+              "E:\\gitlab\\Truescriber\\Truescriber.DAL\\Truescriber.DAL.csproj": {
+                "projectPath": "E:\\gitlab\\Truescriber\\Truescriber.DAL\\Truescriber.DAL.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.1": {
+          "dependencies": {
+            "Google.Cloud.Speech.V1": {
+              "target": "Package",
+              "version": "[1.2.0, )"
+            },
+            "Microsoft.AspNet.Identity.EntityFramework": {
+              "target": "Package",
+              "version": "[2.2.2, )"
+            },
+            "Microsoft.AspNetCore.App": {
+              "target": "Package",
+              "version": "[2.1.1, )"
             },
             "Microsoft.AspNetCore.Razor.Design": {
               "suppressParent": "All",
@@ -58,6 +268,10 @@
               "target": "Package",
               "version": "[2.1.0, )",
               "autoReferenced": true
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[2.1.9, )"
             }
           },
           "imports": [
